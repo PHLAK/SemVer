@@ -9,6 +9,9 @@
             "email": "Chris@ChrisKankiewicz.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/PHLAK/SemVer/issues"
+    },
     "require": {},
     "require-dev": {
         "phpunit/phpunit": "^4.8"

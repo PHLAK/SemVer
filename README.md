@@ -1,11 +1,11 @@
 SemVer
 ======
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/PHLAK/Stash.svg)](https://packagist.org/packages/PHLAK/Stash)
-[![Total Downloads](https://img.shields.io/packagist/dt/PHLAK/Stash.svg)](https://packagist.org/packages/PHLAK/Stash)
+[![Latest Stable Version](https://img.shields.io/packagist/v/PHLAK/SemVer.svg)](https://packagist.org/packages/PHLAK/SemVer)
+[![Total Downloads](https://img.shields.io/packagist/dt/PHLAK/SemVer.svg)](https://packagist.org/packages/PHLAK/SemVer)
 [![Author](https://img.shields.io/badge/author-Chris%20Kankiewicz-blue.svg)](https://www.ChrisKankiewicz.com)
-[![License](https://img.shields.io/packagist/l/PHLAK/Stash.svg)](https://packagist.org/packages/PHLAK/Stash)
-[![Build Status](https://img.shields.io/travis/PHLAK/Stash.svg)](https://travis-ci.org/PHLAK/Stash)
+[![License](https://img.shields.io/packagist/l/PHLAK/SemVer.svg)](https://packagist.org/packages/PHLAK/SemVer)
+[![Build Status](https://img.shields.io/travis/PHLAK/SemVer.svg)](https://travis-ci.org/PHLAK/SemVer)
 
 [Semantic versioning](http://semver.org) helper library for PHP -- by, [Chris Kankiewicz](https://www.ChrisKankiewicz.com)
 
