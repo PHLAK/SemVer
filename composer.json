@@ -1,0 +1,21 @@
+{
+    "name": "phlak/semver",
+    "description": "Semantic versioning helper library",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Kankiewicz",
+            "email": "Chris@ChrisKankiewicz.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "SemVer\\": "src/"
+        }
+    }
+}
