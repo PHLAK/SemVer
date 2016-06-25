@@ -27,10 +27,63 @@ Install with Composer
 composer require phlak/semver
 ```
 
+Initializing
+------------
+
+```php
+use SemVer\SemVer;
+
+$semver = new SemVer(); // Initilializes to 'v0.1.0'
+```
+
+Or initialize with a custom version by passing a version string on creation.
+Accepts any valid semantic version string with or without a preceding 'v'.
+
+```php
+$semver = new SemVer('v1.2.3-alpha.5-sha.8d31ff4');
+```
+
 Usage
 -----
 
-More info coming soon...
+#### Retrieve the version or individual values
+
+```php
+$semver->setVersion('v1.2.3-beta.4+007');
+
+$semver->getVersion();     // v1.2.3-beta.4+007
+$semver->getMajor();       // 1
+$semver->getMinor();       // 2
+$semver->getPatch();       // 3
+$semver->getPreRelease();  // beta.4
+$semver->getBuild();       // 007
+```
+
+#### Increment the version
+
+```php
+$semver->incrementMajor(); // v1.2.3 -> v2.0.0
+$semver->incrementMinor(); // v1.2.3 -> v1.3.0
+$semver->incrementPatch(); // v1.2.3 -> v1.2.4
+```
+
+#### Set (override) the version or individual values
+
+```php
+$semver->setVersion('v1.2.3');  // v1.2.3
+$semver->setMajor(3);           // v1.2.3 -> v3.0.0
+$semver->setMinor(5);           // v1.2.3 -> v1.4.0
+$semver->setPatch(7);           // v1.2.3 -> 1.2.7
+$semver->setPreRelease('rc.2'); // v1.2.3 -> v1.2.3-rc.2
+$semver->setBuild('007');       // v1.2.3 -> v1.2.3+007
+```
+
+#### Clear pre-release / build values
+
+```php
+$semver->setPreRelease(null); // v1.2.3-rc.2 -> v1.2.3
+$semver->setBuild(null);      // v1.2.3+007 -> v1.2.3
+```
 
 Troubleshooting
 ---------------
