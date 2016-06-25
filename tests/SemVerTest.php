@@ -50,9 +50,15 @@ class SemVerTest extends PHPUnit_Framework_TestCase {
     }
 
     /** @test */
-    public function it_can_set_pre() {
+    public function it_can_set_pre_release() {
         $semver = (new SemVer\SemVer)->setPreRelease('alpha.5');
         $this->assertEquals('v0.1.0-alpha.5', $semver->getVersion());
+    }
+
+    /** @test */
+    public function it_can_unset_pre_release() {
+        $semver = (new SemVer\SemVer('v1.3.37-alpha.5'))->setPreRelease(null);
+        $this->assertNull($semver->getPreRelease());
     }
 
     /** @test */
@@ -62,7 +68,13 @@ class SemVerTest extends PHPUnit_Framework_TestCase {
     }
 
     /** @test */
-    public function it_can_get_properties_independently() {
+    public function it_can_unset_build() {
+        $semver = (new SemVer\SemVer('v1.3.37+007'))->setBuild(null);
+        $this->assertNull($semver->getBuild());
+    }
+
+    /** @test */
+    public function it_can_get_individual_properties() {
         $semver = new SemVer\SemVer('v1.3.37-alpha.5+007');
         $this->assertEquals(1, $semver->getMajor());
         $this->assertEquals(3, $semver->getMinor());
