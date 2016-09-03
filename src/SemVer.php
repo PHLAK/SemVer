@@ -2,8 +2,8 @@
 
 namespace SemVer;
 
-class SemVer {
-
+class SemVer
+{
     /** @var int Major release number */
     protected $major;
 
@@ -24,7 +24,8 @@ class SemVer {
      *
      * @param string $version Semantic version string
      */
-    public function __construct($version = 'v0.1.0') {
+    public function __construct($version = 'v0.1.0')
+    {
         $this->setVersion($version);
     }
 
@@ -33,8 +34,8 @@ class SemVer {
      *
      * @param string $version Semantic version string
      */
-    public function setVersion($version) {
-
+    public function setVersion($version)
+    {
         $semverRegex = '/v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Z-.]+))?(?:\+([0-9A-Z-.]+)?)?/i';
 
         if (! preg_match($semverRegex, $version, $matches)) {
@@ -48,7 +49,6 @@ class SemVer {
         $this->build      = @$matches[5] ?: null;
 
         return $this;
-
     }
 
     /**
@@ -59,8 +59,8 @@ class SemVer {
      *
      * @return string          Current semantic version value
      */
-    public function getVersion($prefix = true) {
-
+    public function getVersion($prefix = true)
+    {
         $version = $prefix ? 'v' : null;
 
         $version .= implode('.', [$this->major, $this->minor, $this->patch]);
@@ -68,7 +68,6 @@ class SemVer {
         $version .= isset($this->build) ? '+' . $this->build : null;
 
         return $version;
-
     }
 
     /**
@@ -76,7 +75,8 @@ class SemVer {
      *
      * @return int The major version value
      */
-    public function getMajor() {
+    public function getMajor()
+    {
         return $this->major;
     }
 
@@ -85,7 +85,8 @@ class SemVer {
      *
      * @return object This SemVer\SemVer object
      */
-    public function incrementMajor() {
+    public function incrementMajor()
+    {
         $this->setMajor($this->major + 1);
         return $this;
     }
@@ -97,7 +98,8 @@ class SemVer {
      *
      * @return object        This SemVer\SemVer object
      */
-    public function setMajor($value) {
+    public function setMajor($value)
+    {
         $this->major = $value;
         $this->minor = 0;
         $this->patch = 0;
@@ -110,7 +112,8 @@ class SemVer {
      *
      * @return int The minor version value
      */
-    public function getMinor() {
+    public function getMinor()
+    {
         return $this->minor;
     }
 
@@ -119,7 +122,8 @@ class SemVer {
      *
      * @return object This SemVer\SemVer object
      */
-    public function incrementMinor() {
+    public function incrementMinor()
+    {
         $this->setMinor($this->minor + 1);
         return $this;
     }
@@ -131,7 +135,8 @@ class SemVer {
      *
      * @return object         This SemVer\SemVer object
      */
-    public function setMinor($value) {
+    public function setMinor($value)
+    {
         $this->minor = $value;
         $this->patch = 0;
         $this->preRelease   = null;
@@ -143,7 +148,8 @@ class SemVer {
      *
      * @return int The patch version value
      */
-    public function getPatch() {
+    public function getPatch()
+    {
         return $this->patch;
     }
 
@@ -152,7 +158,8 @@ class SemVer {
      *
      * @return object This SemVer\SemVer object
      */
-    public function incrementPatch() {
+    public function incrementPatch()
+    {
         $this->setPatch($this->patch + 1);
         return $this;
     }
@@ -164,7 +171,8 @@ class SemVer {
      *
      * @return object        This SemVer\SemVer object
      */
-    public function setPatch($value) {
+    public function setPatch($value)
+    {
         $this->patch = $value;
         $this->preRelease   = null;
         return $this;
@@ -175,7 +183,8 @@ class SemVer {
      *
      * @return string The pre-release string value
      */
-    public function getPreRelease() {
+    public function getPreRelease()
+    {
         return $this->preRelease;
     }
 
@@ -186,7 +195,8 @@ class SemVer {
      *
      * @return object        This SemVer\SemVer object
      */
-    public function setPreRelease($value) {
+    public function setPreRelease($value)
+    {
         $this->preRelease = $value;
         return $this;
     }
@@ -196,7 +206,8 @@ class SemVer {
      *
      * @return string The build string value
      */
-    public function getBuild() {
+    public function getBuild()
+    {
         return $this->build;
     }
 
@@ -207,9 +218,9 @@ class SemVer {
      *
      * @return object        This SemVer\SemVer object
      */
-    public function setBuild($value) {
+    public function setBuild($value)
+    {
         $this->build = $value;
         return $this;
     }
-
 }
