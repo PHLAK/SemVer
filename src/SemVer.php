@@ -318,6 +318,27 @@ class SemVer
     }
 
     /**
+     * Check if this SemVer version object is not equal to another
+     *
+     * @param  SemVer $semver An instance of SemVer/SemVer
+     *
+     * @return bool           True if this SemVer object version is not equal to
+     *                        the comparing object, otherwise false
+     */
+    public function notEqualTo(SemVer $semver)
+    {
+        return $this != $semver;
+    }
+
+    /**
+     * Alias for $this->notEqualTo()
+     */
+    public function neq(SemVer $semver)
+    {
+        return $this->notEqualTo($semver);
+    }
+
+    /**
      * Check if this SemVer version object is greater than or equal to another
      *
      * @param  SemVer $semver An instance of SemVer/SemVer
