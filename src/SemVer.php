@@ -291,4 +291,25 @@ class SemVer
     {
         return $this->lessThan($semver);
     }
+
+    /**
+     * Check if this SemVer version object is equal to than another
+     *
+     * @param  SemVer $semver An instance of SemVer/SemVer
+     *
+     * @return bool           True if this SemVer object version is equal to the
+     *                        comparing object, otherwise false
+     */
+    public function equalTo(SemVer $semver)
+    {
+        return $this == $semver;
+    }
+
+    /**
+     * Alias for $this->equalTo()
+     */
+    public function eq(SemVer $semver)
+    {
+        return $this->equalTo($semver);
+    }
 }

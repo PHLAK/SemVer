@@ -110,4 +110,15 @@ class SemVerTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($semver->lessThan(new SemVer\SemVer('v1.3.37')));
         $this->assertFalse($semver->lt(new SemVer\SemVer('v1.3.37')));
     }
+
+    public function test_it_can_be_equal_to_another_semver_object()
+    {
+        $semver = new SemVer\SemVer('v1.3.37');
+
+        $this->assertTrue($semver->equalTo(new SemVer\SemVer('v1.3.37')));
+        $this->assertTrue($semver->eq(new SemVer\SemVer('v1.3.37')));
+
+        $this->assertFalse($semver->equalTo(new SemVer\SemVer('v1.2.3')));
+        $this->assertFalse($semver->eq(new SemVer\SemVer('v1.2.3')));
+    }
 }
