@@ -223,4 +223,72 @@ class SemVer
         $this->build = $value;
         return $this;
     }
+
+    /**
+     * Check if this SemVer version object is greater than another
+     *
+     * @param  SemVer $semver An instance of SemVer/SemVer
+     *
+     * @return bool           True if this SemVer object version is greater than
+     *                        the comparing object, otherwise false
+     */
+    public function greaterThan(SemVer $semver)
+    {
+        if ($this->major > $semver->getMajor()) return true;
+
+        if ($this->major == $semver->getMajor()
+            && $this->minor > $semver->getMinor()) {
+            return true;
+        }
+
+        if ($this->major == $semver->getMajor()
+            && $this->minor == $semver->getMinor()
+            && $this->patch > $semver->getPatch()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Alias for $this->greaterThan()
+     */
+    public function gt(SemVer $semver)
+    {
+        return $this->greaterThan($semver);
+    }
+
+    /**
+     * Check if this SemVer version object is less than another
+     *
+     * @param  SemVer $semver An instance of SemVer/SemVer
+     *
+     * @return bool           True if this SemVer object version is less than
+     *                        the comparing object, otherwise false
+     */
+    public function lessThan(SemVer $semver)
+    {
+        if ($this->major < $semver->getMajor()) return true;
+
+        if ($this->major == $semver->getMajor()
+            && $this->minor < $semver->getMinor()) {
+            return true;
+        }
+
+        if ($this->major == $semver->getMajor()
+            && $this->minor == $semver->getMinor()
+            && $this->patch < $semver->getPatch()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Alias for $this->lessThan()
+     */
+    public function lt(SemVer $semver)
+    {
+        return $this->lessThan($semver);
+    }
 }
