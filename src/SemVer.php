@@ -237,13 +237,15 @@ class SemVer
         if ($this->major > $semver->getMajor()) return true;
 
         if ($this->major == $semver->getMajor()
-            && $this->minor > $semver->getMinor()) {
+            && $this->minor > $semver->getMinor()
+        ) {
             return true;
         }
 
         if ($this->major == $semver->getMajor()
             && $this->minor == $semver->getMinor()
-            && $this->patch > $semver->getPatch()) {
+            && $this->patch > $semver->getPatch()
+        ) {
             return true;
         }
 
@@ -271,13 +273,15 @@ class SemVer
         if ($this->major < $semver->getMajor()) return true;
 
         if ($this->major == $semver->getMajor()
-            && $this->minor < $semver->getMinor()) {
+            && $this->minor < $semver->getMinor()
+        ) {
             return true;
         }
 
         if ($this->major == $semver->getMajor()
             && $this->minor == $semver->getMinor()
-            && $this->patch < $semver->getPatch()) {
+            && $this->patch < $semver->getPatch()
+        ) {
             return true;
         }
 
