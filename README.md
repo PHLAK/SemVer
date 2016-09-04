@@ -85,6 +85,20 @@ $semver->setPreRelease(null); // v1.2.3-rc.2 -> v1.2.3
 $semver->setBuild(null);      // v1.2.3+007 -> v1.2.3
 ```
 
+#### Compare two SemVer objects
+
+```php
+$semver1 = new SemVer('v1.2.3');
+$semver2 = new SemVer('v3.2.1');
+
+$semver1->greaterThan($semver2);           // false
+$semver1->lessThan($semver2);              // true
+$semver1->equalTo($semver2);               // false
+$semver1->notEqualTo($semver2);            // true
+$semver1->greaterThanOrEqualTo($semver2);  // false
+$semver1->lessThanOrEqualTo($semver2);     // true
+```
+
 Troubleshooting
 ---------------
 
@@ -92,7 +106,7 @@ Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/SemVer
 
 -----
 
-MIT License
+This project is liscensed under the MIT License.
 
 **Copyright (c) 2016 Chris Kankiewicz <Chris@ChrisKankiewicz.com>**
 

@@ -249,6 +249,8 @@ class SemVer
             return true;
         }
 
+        // TODO: Check pre-release tag
+
         return false;
     }
 
@@ -284,6 +286,8 @@ class SemVer
         ) {
             return true;
         }
+
+        // TODO: Check pre-release tag
 
         return false;
     }
