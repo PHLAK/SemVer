@@ -87,13 +87,8 @@ class SemVerTest extends PHPUnit_Framework_TestCase
     {
         $semver = new SemVer\SemVer('v1.3.37');
 
-        $this->assertTrue($semver->greaterThan(new SemVer\SemVer('v1.2.3')));
         $this->assertTrue($semver->gt(new SemVer\SemVer('v1.2.3')));
-
-        $this->assertFalse($semver->greaterThan(new SemVer\SemVer('v2.3.4')));
         $this->assertFalse($semver->gt(new SemVer\SemVer('v2.3.4')));
-
-        $this->assertFalse($semver->greaterThan(new SemVer\SemVer('v1.3.37')));
         $this->assertFalse($semver->gt(new SemVer\SemVer('v1.3.37')));
     }
 
@@ -101,13 +96,8 @@ class SemVerTest extends PHPUnit_Framework_TestCase
     {
         $semver = new SemVer\SemVer('v1.3.37');
 
-        $this->assertTrue($semver->lessThan(new SemVer\SemVer('v2.3.4')));
         $this->assertTrue($semver->lt(new SemVer\SemVer('v2.3.4')));
-
-        $this->assertFalse($semver->lessThan(new SemVer\SemVer('v1.2.3')));
         $this->assertFalse($semver->lt(new SemVer\SemVer('v1.2.3')));
-
-        $this->assertFalse($semver->lessThan(new SemVer\SemVer('v1.3.37')));
         $this->assertFalse($semver->lt(new SemVer\SemVer('v1.3.37')));
     }
 
@@ -115,10 +105,7 @@ class SemVerTest extends PHPUnit_Framework_TestCase
     {
         $semver = new SemVer\SemVer('v1.3.37');
 
-        $this->assertTrue($semver->equalTo(new SemVer\SemVer('v1.3.37')));
         $this->assertTrue($semver->eq(new SemVer\SemVer('v1.3.37')));
-
-        $this->assertFalse($semver->equalTo(new SemVer\SemVer('v1.2.3')));
         $this->assertFalse($semver->eq(new SemVer\SemVer('v1.2.3')));
     }
 
@@ -126,10 +113,7 @@ class SemVerTest extends PHPUnit_Framework_TestCase
     {
         $semver = new SemVer\SemVer('v1.3.37');
 
-        $this->assertTrue($semver->notEqualTo(new SemVer\SemVer('v1.2.3')));
         $this->assertTrue($semver->neq(new SemVer\SemVer('v1.2.3')));
-
-        $this->assertFalse($semver->notEqualTo(new SemVer\SemVer('v1.3.37')));
         $this->assertFalse($semver->neq(new SemVer\SemVer('v1.3.37')));
     }
 
@@ -137,13 +121,8 @@ class SemVerTest extends PHPUnit_Framework_TestCase
     {
         $semver = new SemVer\SemVer('v.1.3.37');
 
-        $this->assertTrue($semver->greaterThanOrEqualTo(new SemVer\SemVer('v1.2.3')));
         $this->assertTrue($semver->gte(new SemVer\SemVer('v1.2.3')));
-
-        $this->assertTrue($semver->greaterThanOrEqualTo(new SemVer\SemVer('v1.3.37')));
         $this->assertTrue($semver->gte(new SemVer\SemVer('v1.3.37')));
-
-        $this->assertFalse($semver->greaterThanOrEqualTo(new SemVer\SemVer('v2.3.4')));
         $this->assertFalse($semver->gte(new SemVer\SemVer('v2.3.4')));
     }
 
@@ -151,13 +130,8 @@ class SemVerTest extends PHPUnit_Framework_TestCase
     {
         $semver = new SemVer\SemVer('v.1.3.37');
 
-        $this->assertTrue($semver->lessThanOrEqualTo(new SemVer\SemVer('v2.3.4')));
         $this->assertTrue($semver->lte(new SemVer\SemVer('v2.3.4')));
-
-        $this->assertTrue($semver->lessThanOrEqualTo(new SemVer\SemVer('v1.3.37')));
         $this->assertTrue($semver->lte(new SemVer\SemVer('v1.3.37')));
-
-        $this->assertFalse($semver->lessThanOrEqualTo(new SemVer\SemVer('v1.2.3')));
         $this->assertFalse($semver->lte(new SemVer\SemVer('v1.2.3')));
     }
 }

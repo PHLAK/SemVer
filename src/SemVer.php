@@ -240,7 +240,7 @@ class SemVer
      * @return bool           True if this SemVer object version is greater than
      *                        the comparing object, otherwise false
      */
-    public function greaterThan(SemVer $semver)
+    public function gt(SemVer $semver)
     {
         if ($this->major > $semver->getMajor()) return true;
 
@@ -263,14 +263,6 @@ class SemVer
     }
 
     /**
-     * Alias for $this->greaterThan()
-     */
-    public function gt(SemVer $semver)
-    {
-        return $this->greaterThan($semver);
-    }
-
-    /**
      * Check if this SemVer version object is less than another
      *
      * @param  SemVer $semver An instance of SemVer/SemVer
@@ -278,7 +270,7 @@ class SemVer
      * @return bool           True if this SemVer object version is less than
      *                        the comparing object, otherwise false
      */
-    public function lessThan(SemVer $semver)
+    public function lt(SemVer $semver)
     {
         if ($this->major < $semver->getMajor()) return true;
 
@@ -301,14 +293,6 @@ class SemVer
     }
 
     /**
-     * Alias for $this->lessThan()
-     */
-    public function lt(SemVer $semver)
-    {
-        return $this->lessThan($semver);
-    }
-
-    /**
      * Check if this SemVer version object is equal to than another
      *
      * @param  SemVer $semver An instance of SemVer/SemVer
@@ -316,17 +300,9 @@ class SemVer
      * @return bool           True if this SemVer object version is equal to the
      *                        comparing object, otherwise false
      */
-    public function equalTo(SemVer $semver)
-    {
-        return $this == $semver;
-    }
-
-    /**
-     * Alias for $this->equalTo()
-     */
     public function eq(SemVer $semver)
     {
-        return $this->equalTo($semver);
+        return $this == $semver;
     }
 
     /**
@@ -337,17 +313,9 @@ class SemVer
      * @return bool           True if this SemVer object version is not equal to
      *                        the comparing object, otherwise false
      */
-    public function notEqualTo(SemVer $semver)
-    {
-        return $this != $semver;
-    }
-
-    /**
-     * Alias for $this->notEqualTo()
-     */
     public function neq(SemVer $semver)
     {
-        return $this->notEqualTo($semver);
+        return $this != $semver;
     }
 
     /**
@@ -358,19 +326,11 @@ class SemVer
      * @return bool           True if this SemVer object version is greater than
      *                        or equal to the comparing object, otherwise false
      */
-    public function greaterThanOrEqualTo(SemVer $semver)
-    {
-        if ($this->greaterThan($semver) || $this->equalTo($semver)) return true;
-
-        return false;
-    }
-
-    /**
-     * Alias for $this->greaterThanOrEqualTo()
-     */
     public function gte(SemVer $semver)
     {
-        return $this->greaterThanOrEqualTo($semver);
+        if ($this->gt($semver) || $this->eq($semver)) return true;
+
+        return false;
     }
 
     /**
@@ -381,18 +341,10 @@ class SemVer
      * @return bool           True if this SemVer object version is less than
      *                        or equal to the comparing object, otherwise false
      */
-    public function lessThanOrEqualTo(SemVer $semver)
-    {
-        if ($this->lessThan($semver) || $this->equalTo($semver)) return true;
-
-        return false;
-    }
-
-    /**
-     * Alias for $this->lessThanOrEqualTo()
-     */
     public function lte(SemVer $semver)
     {
-        return $this->lessThanOrEqualTo($semver);
+        if ($this->lt($semver) || $this->eq($semver)) return true;
+
+        return false;
     }
 }

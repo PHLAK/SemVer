@@ -91,12 +91,12 @@ $semver->setBuild(null);      // v1.2.3+007 -> v1.2.3
 $semver1 = new SemVer('v1.2.3');
 $semver2 = new SemVer('v3.2.1');
 
-$semver1->greaterThan($semver2);           // false
-$semver1->lessThan($semver2);              // true
-$semver1->equalTo($semver2);               // false
-$semver1->notEqualTo($semver2);            // true
-$semver1->greaterThanOrEqualTo($semver2);  // false
-$semver1->lessThanOrEqualTo($semver2);     // true
+$semver1->gt($semver2);  // false
+$semver1->lt($semver2);  // true
+$semver1->eq($semver2);  // false
+$semver1->neq($semver2); // true
+$semver1->gte($semver2); // false
+$semver1->lte($semver2); // true
 ```
 
 Troubleshooting
