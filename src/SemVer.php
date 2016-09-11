@@ -42,9 +42,9 @@ class SemVer
             throw new RuntimeException('Invalid version string supplied: ' . $version);
         }
 
-        $this->major      = $matches[1];
-        $this->minor      = $matches[2];
-        $this->patch      = $matches[3];
+        $this->major      = (int) $matches[1];
+        $this->minor      = (int) $matches[2];
+        $this->patch      = (int) $matches[3];
         $this->preRelease = @$matches[4] ?: null;
         $this->build      = @$matches[5] ?: null;
 
@@ -88,6 +88,7 @@ class SemVer
     public function incrementMajor()
     {
         $this->setMajor($this->major + 1);
+
         return $this;
     }
 
@@ -100,10 +101,11 @@ class SemVer
      */
     public function setMajor($value)
     {
-        $this->major = $value;
-        $this->minor = 0;
-        $this->patch = 0;
-        $this->preRelease   = null;
+        $this->major      = (int) $value;
+        $this->minor      = 0;
+        $this->patch      = 0;
+        $this->preRelease = null;
+
         return $this;
     }
 
@@ -125,6 +127,7 @@ class SemVer
     public function incrementMinor()
     {
         $this->setMinor($this->minor + 1);
+
         return $this;
     }
 
@@ -137,9 +140,10 @@ class SemVer
      */
     public function setMinor($value)
     {
-        $this->minor = $value;
-        $this->patch = 0;
-        $this->preRelease   = null;
+        $this->minor      = (int) $value;
+        $this->patch      = 0;
+        $this->preRelease = null;
+
         return $this;
     }
 
@@ -161,6 +165,7 @@ class SemVer
     public function incrementPatch()
     {
         $this->setPatch($this->patch + 1);
+
         return $this;
     }
 
@@ -173,8 +178,9 @@ class SemVer
      */
     public function setPatch($value)
     {
-        $this->patch = $value;
-        $this->preRelease   = null;
+        $this->patch      = (int) $value;
+        $this->preRelease = null;
+
         return $this;
     }
 
@@ -198,6 +204,7 @@ class SemVer
     public function setPreRelease($value)
     {
         $this->preRelease = $value;
+
         return $this;
     }
 
@@ -221,6 +228,7 @@ class SemVer
     public function setBuild($value)
     {
         $this->build = $value;
+
         return $this;
     }
 
