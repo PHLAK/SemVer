@@ -99,8 +99,8 @@ class SemVerTest extends PHPUnit_Framework_TestCase
     {
         $semver = new SemVer\SemVer('v1.3.37');
 
-        $this->assertTrue($semver->gt(new SemVer\SemVer('v1.2.3')));
-        $this->assertFalse($semver->gt(new SemVer\SemVer('v2.3.4')));
+        $this->assertTrue($semver->gt(new SemVer\SemVer('v1.3.36')));
+        $this->assertFalse($semver->gt(new SemVer\SemVer('v1.3.38')));
         $this->assertFalse($semver->gt(new SemVer\SemVer('v1.3.37')));
     }
 
@@ -108,8 +108,8 @@ class SemVerTest extends PHPUnit_Framework_TestCase
     {
         $semver = new SemVer\SemVer('v1.3.37');
 
-        $this->assertTrue($semver->lt(new SemVer\SemVer('v2.3.4')));
-        $this->assertFalse($semver->lt(new SemVer\SemVer('v1.2.3')));
+        $this->assertTrue($semver->lt(new SemVer\SemVer('v1.3.38')));
+        $this->assertFalse($semver->lt(new SemVer\SemVer('v1.3.36')));
         $this->assertFalse($semver->lt(new SemVer\SemVer('v1.3.37')));
     }
 
