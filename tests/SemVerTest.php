@@ -116,6 +116,7 @@ class SemVerTest extends PHPUnit_Framework_TestCase
         $semver = new SemVer\SemVer('v1.3.37');
 
         $this->assertTrue($semver->lt(new SemVer\SemVer('v1.3.38')));
+        $this->assertTrue($semver->lt(new SemVer\SemVer('v1.4.0')));
         $this->assertFalse($semver->lt(new SemVer\SemVer('v1.3.36')));
         $this->assertFalse($semver->lt(new SemVer\SemVer('v1.3.37')));
     }
