@@ -7,6 +7,13 @@ class SemVerTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('SemVer\SemVer', new SemVer\SemVer);
     }
 
+    public function test_it_throws_a_runtime_exception_for_an_invalid_version()
+    {
+        $this->setExpectedException('RuntimeException');
+
+        $semver = new SemVer\SemVer('not.a.version');
+    }
+
     public function test_it_can_set_and_retrieve_a_version()
     {
         $semver = (new SemVer\SemVer)->setVersion('v1.3.37');
@@ -131,7 +138,7 @@ class SemVerTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_be_greater_than_or_equal_to_another_semver_object()
     {
-        $semver = new SemVer\SemVer('v.1.3.37');
+        $semver = new SemVer\SemVer('v1.3.37');
 
         $this->assertTrue($semver->gte(new SemVer\SemVer('v1.2.3')));
         $this->assertTrue($semver->gte(new SemVer\SemVer('v1.3.37')));
@@ -140,7 +147,7 @@ class SemVerTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_be_less_than_or_equal_to_another_semver_object()
     {
-        $semver = new SemVer\SemVer('v.1.3.37');
+        $semver = new SemVer\SemVer('v1.3.37');
 
         $this->assertTrue($semver->lte(new SemVer\SemVer('v2.3.4')));
         $this->assertTrue($semver->lte(new SemVer\SemVer('v1.3.37')));

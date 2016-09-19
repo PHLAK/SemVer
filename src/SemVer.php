@@ -36,10 +36,10 @@ class SemVer
      */
     public function setVersion($version)
     {
-        $semverRegex = '/v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Z-.]+))?(?:\+([0-9A-Z-.]+)?)?/i';
+        $semverRegex = '/^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Z-.]+))?(?:\+([0-9A-Z-.]+)?)?$/i';
 
         if (! preg_match($semverRegex, $version, $matches)) {
-            throw new RuntimeException('Invalid version string supplied: ' . $version);
+            throw new \RuntimeException('Invalid version string supplied: ' . $version);
         }
 
         $this->major      = (int) $matches[1];
