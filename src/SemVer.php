@@ -2,6 +2,8 @@
 
 namespace SemVer;
 
+use SemVer\Exceptions\InvalidVersionException;
+
 class SemVer
 {
     /** @var int Major release number */
@@ -39,7 +41,7 @@ class SemVer
         $semverRegex = '/^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Z-.]+))?(?:\+([0-9A-Z-.]+)?)?$/i';
 
         if (! preg_match($semverRegex, $version, $matches)) {
-            throw new \RuntimeException('Invalid version string supplied: ' . $version);
+            throw new InvalidVersionException;
         }
 
         $this->major      = (int) $matches[1];

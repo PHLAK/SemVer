@@ -9,7 +9,7 @@ class SemVerTest extends PHPUnit_Framework_TestCase
 
     public function test_it_throws_a_runtime_exception_for_an_invalid_version()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->setExpectedException('SemVer\Exceptions\InvalidVersionException');
 
         $semver = new SemVer\SemVer('not.a.version');
     }
