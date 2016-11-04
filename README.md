@@ -72,7 +72,7 @@ $semver->incrementPatch(); // v1.2.3 -> v1.2.4
 ```php
 $semver->setVersion('v1.2.3');  // v1.2.3
 $semver->setMajor(3);           // v1.2.3 -> v3.0.0
-$semver->setMinor(5);           // v1.2.3 -> v1.4.0
+$semver->setMinor(5);           // v1.2.3 -> v1.5.0
 $semver->setPatch(7);           // v1.2.3 -> 1.2.7
 $semver->setPreRelease('rc.2'); // v1.2.3 -> v1.2.3-rc.2
 $semver->setBuild('007');       // v1.2.3 -> v1.2.3+007
