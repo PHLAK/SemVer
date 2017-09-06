@@ -41,7 +41,7 @@ class SemVer
         $semverRegex = '/^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Z-.]+))?(?:\+([0-9A-Z-.]+)?)?$/i';
 
         if (! preg_match($semverRegex, $version, $matches)) {
-            throw new InvalidVersionException;
+            throw new InvalidVersionException('Invalid Semantic Version string provided');
         }
 
         $this->major = (int) $matches[1];
