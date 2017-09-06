@@ -22,7 +22,7 @@ class SemVer
     protected $build;
 
     /**
-     * SemVer\SemVer constructor, runs on object creation
+     * SemVer\SemVer constructor, runs on object creation.
      *
      * @param string $version Semantic version string
      */
@@ -32,7 +32,7 @@ class SemVer
     }
 
     /**
-     * Set (override) the entire semantic version value
+     * Set (override) the entire semantic version value.
      *
      * @param string $version Semantic version string
      */
@@ -44,22 +44,22 @@ class SemVer
             throw new InvalidVersionException;
         }
 
-        $this->major      = (int) $matches[1];
-        $this->minor      = (int) $matches[2];
-        $this->patch      = (int) $matches[3];
+        $this->major = (int) $matches[1];
+        $this->minor = (int) $matches[2];
+        $this->patch = (int) $matches[3];
         $this->preRelease = @$matches[4] ?: null;
-        $this->build      = @$matches[5] ?: null;
+        $this->build = @$matches[5] ?: null;
 
         return $this;
     }
 
     /**
-     * Get the current semantic version value
+     * Get the current semantic version value.
      *
-     * @param  boolean $prefix If false, don't prefix the version string with
-     *                         a 'v' (default: true).
+     * @param bool $prefix if false, don't prefix the version string with
+     *                     a 'v' (default: true)
      *
-     * @return string          Current semantic version value
+     * @return string Current semantic version value
      */
     public function getVersion($prefix = true)
     {
@@ -73,7 +73,7 @@ class SemVer
     }
 
     /**
-     * Get the current major version value
+     * Get the current major version value.
      *
      * @return int The major version value
      */
@@ -83,7 +83,7 @@ class SemVer
     }
 
     /**
-     * Increment the major version value by one
+     * Increment the major version value by one.
      *
      * @return object This SemVer\SemVer object
      */
@@ -95,24 +95,24 @@ class SemVer
     }
 
     /**
-     * Set the major version to a custom value
+     * Set the major version to a custom value.
      *
-     * @param  int    $value Positive integer value
+     * @param int $value Positive integer value
      *
-     * @return object        This SemVer\SemVer object
+     * @return object This SemVer\SemVer object
      */
     public function setMajor($value)
     {
-        $this->major      = (int) $value;
-        $this->minor      = 0;
-        $this->patch      = 0;
+        $this->major = (int) $value;
+        $this->minor = 0;
+        $this->patch = 0;
         $this->preRelease = null;
 
         return $this;
     }
 
     /**
-     * Get the current minor version value
+     * Get the current minor version value.
      *
      * @return int The minor version value
      */
@@ -122,7 +122,7 @@ class SemVer
     }
 
     /**
-     * Increment the minor version value by one
+     * Increment the minor version value by one.
      *
      * @return object This SemVer\SemVer object
      */
@@ -134,23 +134,23 @@ class SemVer
     }
 
     /**
-     * Set the minor version to a custom value
+     * Set the minor version to a custom value.
      *
-     * @param  int     $value Positive integer value
+     * @param int $value Positive integer value
      *
-     * @return object         This SemVer\SemVer object
+     * @return object This SemVer\SemVer object
      */
     public function setMinor($value)
     {
-        $this->minor      = (int) $value;
-        $this->patch      = 0;
+        $this->minor = (int) $value;
+        $this->patch = 0;
         $this->preRelease = null;
 
         return $this;
     }
 
     /**
-     * Get the current patch version value
+     * Get the current patch version value.
      *
      * @return int The patch version value
      */
@@ -160,7 +160,7 @@ class SemVer
     }
 
     /**
-     * Increment the patch version value by one
+     * Increment the patch version value by one.
      *
      * @return object This SemVer\SemVer object
      */
@@ -172,22 +172,22 @@ class SemVer
     }
 
     /**
-     * Set the patch version to a custom value
+     * Set the patch version to a custom value.
      *
-     * @param  int    $value Positive integer value
+     * @param int $value Positive integer value
      *
-     * @return object        This SemVer\SemVer object
+     * @return object This SemVer\SemVer object
      */
     public function setPatch($value)
     {
-        $this->patch      = (int) $value;
+        $this->patch = (int) $value;
         $this->preRelease = null;
 
         return $this;
     }
 
     /**
-     * Get the current Pre-release string value
+     * Get the current Pre-release string value.
      *
      * @return string The pre-release string value
      */
@@ -197,11 +197,11 @@ class SemVer
     }
 
     /**
-     * Set the pre-release string to a custom value
+     * Set the pre-release string to a custom value.
      *
-     * @param  string $value A new pre-release value
+     * @param string $value A new pre-release value
      *
-     * @return object        This SemVer\SemVer object
+     * @return object This SemVer\SemVer object
      */
     public function setPreRelease($value)
     {
@@ -211,7 +211,7 @@ class SemVer
     }
 
     /**
-     * Get the current build string value
+     * Get the current build string value.
      *
      * @return string The build string value
      */
@@ -221,11 +221,11 @@ class SemVer
     }
 
     /**
-     * Set the build string to a custom value
+     * Set the build string to a custom value.
      *
-     * @param  string $value A new build value
+     * @param string $value A new build value
      *
-     * @return object        This SemVer\SemVer object
+     * @return object This SemVer\SemVer object
      */
     public function setBuild($value)
     {
@@ -235,16 +235,18 @@ class SemVer
     }
 
     /**
-     * Check if this SemVer version object is greater than another
+     * Check if this SemVer version object is greater than another.
      *
-     * @param  SemVer $semver An instance of SemVer/SemVer
+     * @param SemVer $semver An instance of SemVer/SemVer
      *
-     * @return bool           True if this SemVer object version is greater than
-     *                        the comparing object, otherwise false
+     * @return bool True if this SemVer object version is greater than
+     *              the comparing object, otherwise false
      */
     public function gt(SemVer $semver)
     {
-        if ($this->major > $semver->getMajor()) return true;
+        if ($this->major > $semver->getMajor()) {
+            return true;
+        }
 
         if ($this->major == $semver->getMajor()
             && $this->minor > $semver->getMinor()
@@ -265,16 +267,18 @@ class SemVer
     }
 
     /**
-     * Check if this SemVer version object is less than another
+     * Check if this SemVer version object is less than another.
      *
-     * @param  SemVer $semver An instance of SemVer/SemVer
+     * @param SemVer $semver An instance of SemVer/SemVer
      *
-     * @return bool           True if this SemVer object version is less than
-     *                        the comparing object, otherwise false
+     * @return bool True if this SemVer object version is less than
+     *              the comparing object, otherwise false
      */
     public function lt(SemVer $semver)
     {
-        if ($this->major < $semver->getMajor()) return true;
+        if ($this->major < $semver->getMajor()) {
+            return true;
+        }
 
         if ($this->major == $semver->getMajor()
             && $this->minor < $semver->getMinor()
@@ -295,12 +299,12 @@ class SemVer
     }
 
     /**
-     * Check if this SemVer version object is equal to than another
+     * Check if this SemVer version object is equal to than another.
      *
-     * @param  SemVer $semver An instance of SemVer/SemVer
+     * @param SemVer $semver An instance of SemVer/SemVer
      *
-     * @return bool           True if this SemVer object version is equal to the
-     *                        comparing object, otherwise false
+     * @return bool True if this SemVer object version is equal to the
+     *              comparing object, otherwise false
      */
     public function eq(SemVer $semver)
     {
@@ -308,12 +312,12 @@ class SemVer
     }
 
     /**
-     * Check if this SemVer version object is not equal to another
+     * Check if this SemVer version object is not equal to another.
      *
-     * @param  SemVer $semver An instance of SemVer/SemVer
+     * @param SemVer $semver An instance of SemVer/SemVer
      *
-     * @return bool           True if this SemVer object version is not equal to
-     *                        the comparing object, otherwise false
+     * @return bool True if this SemVer object version is not equal to
+     *              the comparing object, otherwise false
      */
     public function neq(SemVer $semver)
     {
@@ -321,31 +325,35 @@ class SemVer
     }
 
     /**
-     * Check if this SemVer version object is greater than or equal to another
+     * Check if this SemVer version object is greater than or equal to another.
      *
-     * @param  SemVer $semver An instance of SemVer/SemVer
+     * @param SemVer $semver An instance of SemVer/SemVer
      *
-     * @return bool           True if this SemVer object version is greater than
-     *                        or equal to the comparing object, otherwise false
+     * @return bool True if this SemVer object version is greater than
+     *              or equal to the comparing object, otherwise false
      */
     public function gte(SemVer $semver)
     {
-        if ($this->gt($semver) || $this->eq($semver)) return true;
+        if ($this->gt($semver) || $this->eq($semver)) {
+            return true;
+        }
 
         return false;
     }
 
     /**
-     * Check if this SemVer version object is less than or equal to another
+     * Check if this SemVer version object is less than or equal to another.
      *
-     * @param  SemVer $semver An instance of SemVer/SemVer
+     * @param SemVer $semver An instance of SemVer/SemVer
      *
-     * @return bool           True if this SemVer object version is less than
-     *                        or equal to the comparing object, otherwise false
+     * @return bool True if this SemVer object version is less than
+     *              or equal to the comparing object, otherwise false
      */
     public function lte(SemVer $semver)
     {
-        if ($this->lt($semver) || $this->eq($semver)) return true;
+        if ($this->lt($semver) || $this->eq($semver)) {
+            return true;
+        }
 
         return false;
     }
