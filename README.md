@@ -33,14 +33,14 @@ Initializing
 ```php
 use PHLAK\SemVer;
 
-$semver = new SemVer\SemVer(); // Initilializes to 'v0.1.0'
+$version = new SemVer\Version(); // Initilializes to '0.1.0'
 ```
 
 Or initialize with a custom version by passing a version string on creation.
 Accepts any valid semantic version string with or without a preceding 'v'.
 
 ```php
-$semver = new SemVer\SemVer('v1.2.3-alpha.5-sha.8d31ff4');
+$version = new SemVer\Version('v1.2.3-alpha.5-sha.8d31ff4');
 ```
 
 Usage
@@ -49,54 +49,58 @@ Usage
 #### Retrieve the version or individual values
 
 ```php
-$semver->setVersion('v1.2.3-beta.4+007');
+$version = new SemVer\Version('v1.2.3-beta.4+007');
 
-$semver->getVersion();     // v1.2.3-beta.4+007
-$semver->getMajor();       // 1
-$semver->getMinor();       // 2
-$semver->getPatch();       // 3
-$semver->getPreRelease();  // beta.4
-$semver->getBuild();       // 007
+echo $version;             // '1.2.3-beta.4+007'
+echo $version->major;      // 1
+echo $version->minor;      // 2
+echo $version->patch;      // 3
+echo $version->preRelease; // 'beta.4'
+echo $version->build;      // '007'
 ```
 
 #### Increment the version
 
 ```php
-$semver->incrementMajor(); // v1.2.3 -> v2.0.0
-$semver->incrementMinor(); // v1.2.3 -> v1.3.0
-$semver->incrementPatch(); // v1.2.3 -> v1.2.4
+$version = new SemVer\Version('v1.2.3');
+
+$version->incrementMajor(); // v1.2.3 -> v2.0.0
+$version->incrementMinor(); // v1.2.3 -> v1.3.0
+$version->incrementPatch(); // v1.2.3 -> v1.2.4
 ```
 
 #### Set (override) the version or individual values
 
 ```php
-$semver->setVersion('v1.2.3');  // v1.2.3
-$semver->setMajor(3);           // v1.2.3 -> v3.0.0
-$semver->setMinor(5);           // v1.2.3 -> v1.5.0
-$semver->setPatch(7);           // v1.2.3 -> 1.2.7
-$semver->setPreRelease('rc.2'); // v1.2.3 -> v1.2.3-rc.2
-$semver->setBuild('007');       // v1.2.3 -> v1.2.3+007
+$version = new SemVer\Version();
+
+$version->setVersion('v1.2.3');  // v1.2.3
+$version->setMajor(3);           // v1.2.3 -> v3.0.0
+$version->setMinor(5);           // v1.2.3 -> v1.5.0
+$version->setPatch(7);           // v1.2.3 -> 1.2.7
+$version->setPreRelease('rc.2'); // v1.2.3 -> v1.2.3-rc.2
+$version->setBuild('007');       // v1.2.3 -> v1.2.3+007
 ```
 
 #### Clear pre-release / build values
 
 ```php
-$semver->setPreRelease(null); // v1.2.3-rc.2 -> v1.2.3
-$semver->setBuild(null);      // v1.2.3+007 -> v1.2.3
+$version->setPreRelease(null); // v1.2.3-rc.2 -> v1.2.3
+$version->setBuild(null);      // v1.2.3+007 -> v1.2.3
 ```
 
 #### Compare two SemVer objects
 
 ```php
-$semver1 = new SemVer('v1.2.3');
-$semver2 = new SemVer('v3.2.1');
+$version1 = new SemVer('v1.2.3');
+$version2 = new SemVer('v3.2.1');
 
-$semver1->gt($semver2);  // false
-$semver1->lt($semver2);  // true
-$semver1->eq($semver2);  // false
-$semver1->neq($semver2); // true
-$semver1->gte($semver2); // false
-$semver1->lte($semver2); // true
+$version1->gt($version2);  // false
+$version1->lt($version2);  // true
+$version1->eq($version2);  // false
+$version1->neq($version2); // true
+$version1->gte($version2); // false
+$version1->lte($version2); // true
 ```
 
 Troubleshooting
