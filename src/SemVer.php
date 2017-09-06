@@ -15,7 +15,7 @@ class SemVer
     /** @var int Patch release number */
     protected $patch;
 
-    /** @var string Pre-release value */
+    /** @var string|null Pre-release value */
     protected $preRelease;
 
     /** @var string Build release value */
@@ -103,7 +103,7 @@ class SemVer
      */
     public function setMajor($value)
     {
-        $this->major = (int) $value;
+        $this->major = $value;
         $this->minor = 0;
         $this->patch = 0;
         $this->preRelease = null;
@@ -142,7 +142,7 @@ class SemVer
      */
     public function setMinor($value)
     {
-        $this->minor = (int) $value;
+        $this->minor = $value;
         $this->patch = 0;
         $this->preRelease = null;
 
@@ -180,7 +180,7 @@ class SemVer
      */
     public function setPatch($value)
     {
-        $this->patch = (int) $value;
+        $this->patch = $value;
         $this->preRelease = null;
 
         return $this;
@@ -189,7 +189,7 @@ class SemVer
     /**
      * Get the current Pre-release string value.
      *
-     * @return string The pre-release string value
+     * @return string|null The pre-release string value
      */
     public function getPreRelease()
     {
