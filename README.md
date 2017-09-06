@@ -31,16 +31,16 @@ Initializing
 ------------
 
 ```php
-use SemVer\SemVer;
+use PHLAK\SemVer;
 
-$semver = new SemVer(); // Initilializes to 'v0.1.0'
+$semver = new SemVer\SemVer(); // Initilializes to 'v0.1.0'
 ```
 
 Or initialize with a custom version by passing a version string on creation.
 Accepts any valid semantic version string with or without a preceding 'v'.
 
 ```php
-$semver = new SemVer('v1.2.3-alpha.5-sha.8d31ff4');
+$semver = new SemVer\SemVer('v1.2.3-alpha.5-sha.8d31ff4');
 ```
 
 Usage

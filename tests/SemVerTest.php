@@ -1,15 +1,17 @@
 <?php
 
+use PHLAK\SemVer;
+
 class SemVerTest extends PHPUnit_Framework_TestCase
 {
     public function test_it_can_be_initialized()
     {
-        $this->assertInstanceOf('SemVer\SemVer', new SemVer\SemVer);
+        $this->assertInstanceOf(SemVer\SemVer::class, new SemVer\SemVer);
     }
 
     public function test_it_throws_a_runtime_exception_for_an_invalid_version()
     {
-        $this->setExpectedException('SemVer\Exceptions\InvalidVersionException');
+        $this->setExpectedException(SemVer\Exceptions\InvalidVersionException::class);
 
         $semver = new SemVer\SemVer('not.a.version');
     }

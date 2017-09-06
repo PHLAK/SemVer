@@ -1,6 +1,6 @@
 <?php
 
-namespace SemVer\Exceptions;
+namespace PHLAK\SemVer\Exceptions;
 
 use Exception;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace SemVer;
+namespace PHLAK\SemVer;
 
-use SemVer\Exceptions\InvalidVersionException;
+use PHLAK\SemVer\Exceptions\InvalidVersionException;
 
 class SemVer
 {
