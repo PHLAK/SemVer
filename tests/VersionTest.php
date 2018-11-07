@@ -129,7 +129,6 @@ class VersionTest extends TestCase
         $this->assertTrue($this->version->gt(new SemVer\Version('v1.3.36')));
         $this->assertFalse($this->version->gt(new SemVer\Version('v1.3.38')));
         $this->assertFalse($this->version->gt(new SemVer\Version('v1.3.37')));
-        $this->assertTrue($this->version->gt(new SemVer\Version('v1.3.35')));
     }
 
     public function test_it_can_be_greater_than_another_major_semver_object()
