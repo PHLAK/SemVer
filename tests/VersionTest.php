@@ -3,6 +3,7 @@
 namespace PHLAK\SemVer\Tests;
 
 use PHLAK\SemVer;
+use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHPUnit\Framework\TestCase;
 
 class VersionTest extends TestCase
@@ -17,11 +18,10 @@ class VersionTest extends TestCase
         $this->assertInstanceOf(SemVer\Version::class, $this->version);
     }
 
-    /**
-     * @expectedException PHLAK\SemVer\Exceptions\InvalidVersionException
-     */
     public function test_it_throws_a_runtime_exception_for_an_invalid_version()
     {
+        $this->expectException(InvalidVersionException::class);
+
         new SemVer\Version('not.a.version');
     }
 
