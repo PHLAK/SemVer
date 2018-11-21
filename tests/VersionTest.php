@@ -1,8 +1,12 @@
 <?php
 
-use PHLAK\SemVer;
+namespace PHLAK\SemVer\Tests;
 
-class VersionTest extends PHPUnit_Framework_TestCase
+use PHLAK\SemVer;
+use PHLAK\SemVer\Exceptions\InvalidVersionException;
+use PHPUnit\Framework\TestCase;
+
+class VersionTest extends TestCase
 {
     public function setUp()
     {
@@ -16,9 +20,9 @@ class VersionTest extends PHPUnit_Framework_TestCase
 
     public function test_it_throws_a_runtime_exception_for_an_invalid_version()
     {
-        $this->setExpectedException(SemVer\Exceptions\InvalidVersionException::class);
+        $this->expectException(InvalidVersionException::class);
 
-        $version = new SemVer\Version('not.a.version');
+        new SemVer\Version('not.a.version');
     }
 
     public function test_it_can_set_and_retrieve_a_version()
@@ -125,6 +129,15 @@ class VersionTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->version->gt(new SemVer\Version('v1.3.36')));
         $this->assertFalse($this->version->gt(new SemVer\Version('v1.3.38')));
         $this->assertFalse($this->version->gt(new SemVer\Version('v1.3.37')));
+    }
+
+    public function test_it_can_be_greater_than_another_major_semver_object()
+    {
+        $major = $this->version->setMajor(1.3);
+        $semver = new SemVer\Version('v1.3.38');
+        $semverMajor = $semver->setMajor(1.2);
+
+        $this->assertTrue($major->gt($semverMajor));
     }
 
     public function test_it_can_be_less_than_another_semver_object()
