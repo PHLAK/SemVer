@@ -17,7 +17,7 @@ More info coming soon...
 Requirements
 ------------
 
-  - [PHP](https://php.net) >= 5.4
+  - [PHP](https://php.net) >= 7.0
 
 
 Install with Composer
