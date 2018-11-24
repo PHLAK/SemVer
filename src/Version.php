@@ -53,7 +53,7 @@ class Version
      */
     public function __toString()
     {
-        return $this->toString(null);
+        return $this->toString();
     }
 
     /**
@@ -292,11 +292,7 @@ class Version
      */
     public function gte(Version $version)
     {
-        if ($this->gt($version) || $this->eq($version)) {
-            return true;
-        }
-
-        return false;
+        return $this->gt($version) || $this->eq($version);
     }
 
     /**
@@ -309,11 +305,7 @@ class Version
      */
     public function lte(Version $version)
     {
-        if ($this->lt($version) || $this->eq($version)) {
-            return true;
-        }
-
-        return false;
+        return $this->lt($version) || $this->eq($version);
     }
 
     /**
