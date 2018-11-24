@@ -108,8 +108,13 @@ Troubleshooting
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/SemVer/issues).
 
+Testing
+---------------
+```bash
+composer test
+```
+
 Copyright
 ---------
 
 This project is liscensed under the [MIT License](https://github.com/PHLAK/SemVer/blob/master/LICENSE).
-
