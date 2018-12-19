@@ -2,6 +2,9 @@
 
 namespace PHLAK\SemVer;
 
+use function function_exists;
+use function shell_exec;
+use PHLAK\SemVer\Exceptions\GitTagException;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 
 class Version
@@ -59,11 +62,11 @@ class Version
     /**
      * Set (override) the entire version value.
      *
-     * @param string $version Version string
+     * @param string $version Version string  bool $tagGit
      *
      * @return Version This Version object
      */
-    public function setVersion($version)
+    public function setVersion($version, bool $tagGit = false)
     {
         $semverRegex = '/^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Z-.]+))?(?:\+([0-9A-Z-.]+)?)?$/i';
 
@@ -77,17 +80,23 @@ class Version
         $this->preRelease = @$matches[4] ?: null;
         $this->build = @$matches[5] ?: null;
 
+		$tagGit ?? $this->tagGit();
+
         return $this;
     }
 
     /**
      * Increment the major version value by one.
+	 *
+	 * @param bool $tagGit
      *
      * @return Version This Version object
      */
-    public function incrementMajor()
+    public function incrementMajor(bool $tagGit = false)
     {
         $this->setMajor($this->major + 1);
+
+		$tagGit ?? $this->tagGit();
 
         return $this;
     }
@@ -95,28 +104,34 @@ class Version
     /**
      * Set the major version to a custom value.
      *
-     * @param int $value Positive integer value
+     * @param int $value Positive integer value  bool $tagGit
      *
      * @return Version This Version object
      */
-    public function setMajor($value)
+    public function setMajor($value, bool $tagGit = false)
     {
         $this->major = $value;
         $this->minor = 0;
         $this->patch = 0;
         $this->preRelease = null;
 
+		$tagGit ?? $this->tagGit();
+
         return $this;
     }
 
     /**
      * Increment the minor version value by one.
+	 *
+	 * @param bool $tagGit
      *
      * @return Version This Version object
      */
-    public function incrementMinor()
+    public function incrementMinor(bool $tagGit = false)
     {
         $this->setMinor($this->minor + 1);
+
+		$tagGit ?? $this->tagGit();
 
         return $this;
     }
@@ -124,42 +139,50 @@ class Version
     /**
      * Set the minor version to a custom value.
      *
-     * @param int $value Positive integer value
+     * @param int $value Positive integer value  bool $tagGit
      *
      * @return Version This Version object
      */
-    public function setMinor($value)
+    public function setMinor($value, bool $tagGit = false)
     {
         $this->minor = $value;
         $this->patch = 0;
         $this->preRelease = null;
+
+		$tagGit ?? $this->tagGit();
 
         return $this;
     }
 
     /**
      * Increment the patch version value by one.
+	 *
+	 * @param bool $tagGit
      *
      * @return Version This Version object
      */
-    public function incrementPatch()
+    public function incrementPatch(bool $tagGit = false)
     {
         $this->setPatch($this->patch + 1);
 
-        return $this;
+		$tagGit ?? $this->tagGit();
+
+		return $this;
     }
 
     /**
      * Set the patch version to a custom value.
      *
-     * @param int $value Positive integer value
+     * @param int $value Positive integer value  bool $tagGit
      *
      * @return Version This Version object
      */
-    public function setPatch($value)
+    public function setPatch($value, bool $tagGit = false)
     {
         $this->patch = $value;
         $this->preRelease = null;
+
+		$tagGit ?? $this->tagGit();
 
         return $this;
     }
@@ -167,13 +190,15 @@ class Version
     /**
      * Set the pre-release string to a custom value.
      *
-     * @param string $value A new pre-release value
+     * @param string $value A new pre-release value  bool $tagGit
      *
      * @return Version This Version object
      */
-    public function setPreRelease($value)
+    public function setPreRelease($value, bool $tagGit = false)
     {
         $this->preRelease = $value;
+
+		$tagGit ?? $this->tagGit();
 
         return $this;
     }
@@ -181,13 +206,15 @@ class Version
     /**
      * Set the build string to a custom value.
      *
-     * @param string $value A new build value
+     * @param string $value A new build value  bool $tagGit
      *
      * @return Version This Version object
      */
-    public function setBuild($value)
+    public function setBuild($value, bool $tagGit = false)
     {
         $this->build = $value;
+
+		$tagGit ?? $this->tagGit();
 
         return $this;
     }
@@ -321,6 +348,23 @@ class Version
         return $prefix . $this->toString();
     }
 
+	/**
+	 * Tag the git branch with the current prefixed version
+	 *
+	 * @return bool
+	 * @throws GitTagException
+	 */
+	protected function tagGit()
+	{
+		if (function_exists('shell_exec') ) {
+			if (is_null(shell_exec('get tag ' . $this->prefix() )) ) {
+				throw new GitTagException('Failed to set tag for current Git Branch');
+			}
+			return true;
+		}
+		throw new GitTagException('Unable to set Git Tag as shell_exec is disabled');
+    }
+
     /**
      * Get the current version value as a string.
      *
@@ -334,4 +378,6 @@ class Version
 
         return $version;
     }
+
+
 }
