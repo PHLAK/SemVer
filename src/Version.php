@@ -70,25 +70,25 @@ class Version
     {
         $semverRegex = '/^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Z-.]+))?(?:\+([0-9A-Z-.]+)?)?$/i';
 
-        if (! preg_match($semverRegex, $version, $matches)) {
+        if (!preg_match($semverRegex, $version, $matches)) {
             throw new InvalidVersionException('Invalid Semantic Version string provided');
         }
 
-        $this->major = (int) $matches[1];
-        $this->minor = (int) $matches[2];
-        $this->patch = (int) $matches[3];
+        $this->major = (int)$matches[1];
+        $this->minor = (int)$matches[2];
+        $this->patch = (int)$matches[3];
         $this->preRelease = @$matches[4] ?: null;
         $this->build = @$matches[5] ?: null;
 
-		$tagGit ?? $this->tagGit();
+        $tagGit ?? $this->tagGit();
 
         return $this;
     }
 
     /**
      * Increment the major version value by one.
-	 *
-	 * @param bool $tagGit
+     *
+     * @param bool $tagGit
      *
      * @return Version This Version object
      */
@@ -96,7 +96,7 @@ class Version
     {
         $this->setMajor($this->major + 1);
 
-		$tagGit ?? $this->tagGit();
+        $tagGit ?? $this->tagGit();
 
         return $this;
     }
@@ -115,15 +115,15 @@ class Version
         $this->patch = 0;
         $this->preRelease = null;
 
-		$tagGit ?? $this->tagGit();
+        $tagGit ?? $this->tagGit();
 
         return $this;
     }
 
     /**
      * Increment the minor version value by one.
-	 *
-	 * @param bool $tagGit
+     *
+     * @param bool $tagGit
      *
      * @return Version This Version object
      */
@@ -131,7 +131,7 @@ class Version
     {
         $this->setMinor($this->minor + 1);
 
-		$tagGit ?? $this->tagGit();
+        $tagGit ?? $this->tagGit();
 
         return $this;
     }
@@ -149,15 +149,15 @@ class Version
         $this->patch = 0;
         $this->preRelease = null;
 
-		$tagGit ?? $this->tagGit();
+        $tagGit ?? $this->tagGit();
 
         return $this;
     }
 
     /**
      * Increment the patch version value by one.
-	 *
-	 * @param bool $tagGit
+     *
+     * @param bool $tagGit
      *
      * @return Version This Version object
      */
@@ -165,9 +165,9 @@ class Version
     {
         $this->setPatch($this->patch + 1);
 
-		$tagGit ?? $this->tagGit();
+        $tagGit ?? $this->tagGit();
 
-		return $this;
+        return $this;
     }
 
     /**
@@ -182,7 +182,7 @@ class Version
         $this->patch = $value;
         $this->preRelease = null;
 
-		$tagGit ?? $this->tagGit();
+        $tagGit ?? $this->tagGit();
 
         return $this;
     }
@@ -198,7 +198,7 @@ class Version
     {
         $this->preRelease = $value;
 
-		$tagGit ?? $this->tagGit();
+        $tagGit ?? $this->tagGit();
 
         return $this;
     }
@@ -214,7 +214,7 @@ class Version
     {
         $this->build = $value;
 
-		$tagGit ?? $this->tagGit();
+        $tagGit ?? $this->tagGit();
 
         return $this;
     }
@@ -348,21 +348,21 @@ class Version
         return $prefix . $this->toString();
     }
 
-	/**
-	 * Tag the git branch with the current prefixed version
-	 *
-	 * @return bool
-	 * @throws GitTagException
-	 */
-	protected function tagGit()
-	{
-		if (function_exists('shell_exec') ) {
-			if (is_null(shell_exec('get tag ' . $this->prefix() )) ) {
-				throw new GitTagException('Failed to set tag for current Git Branch');
-			}
-			return true;
-		}
-		throw new GitTagException('Unable to set Git Tag as shell_exec is disabled');
+    /**
+     * Tag the git branch with the current prefixed version
+     *
+     * @return bool
+     * @throws GitTagException
+     */
+    protected function tagGit()
+    {
+        if (function_exists('shell_exec')) {
+            if (is_null(shell_exec('get tag ' . $this->prefix()))) {
+                throw new GitTagException('Failed to set tag for current Git Branch');
+            }
+            return true;
+        }
+        throw new GitTagException('Unable to set Git Tag as shell_exec is disabled');
     }
 
     /**
