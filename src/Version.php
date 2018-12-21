@@ -80,7 +80,7 @@ class Version
         $this->preRelease = @$matches[4] ?: null;
         $this->build = @$matches[5] ?: null;
 
-        $tagGit ?? $this->tagGit();
+        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -357,7 +357,7 @@ class Version
     protected function tagGit()
     {
         if (function_exists('shell_exec')) {
-            if (is_null(shell_exec('get tag ' . $this->prefix()))) {
+            if (!is_null(shell_exec('git tag ' . $this->prefix()))) {
                 throw new GitTagException('Failed to set tag for current Git Branch');
             }
             return true;
