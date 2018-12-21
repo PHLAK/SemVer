@@ -173,4 +173,11 @@ class VersionTest extends TestCase
         $this->assertTrue($this->version->lte(new SemVer\Version('v1.3.37')));
         $this->assertFalse($this->version->lte(new SemVer\Version('v1.2.3')));
     }
+
+    public function test_it_can_tag_git_with_version() {
+
+        $this->version->setVersion('v2.4.48', true);
+        $this->assertEquals(preg_replace('/\r\n|\r|\n/', '', (string) shell_exec('git describe --tags')), (string) $this->version->prefix());
+
+    }
 }

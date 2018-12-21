@@ -96,7 +96,7 @@ class Version
     {
         $this->setMajor($this->major + 1);
 
-        $tagGit ?? $this->tagGit();
+        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -115,7 +115,7 @@ class Version
         $this->patch = 0;
         $this->preRelease = null;
 
-        $tagGit ?? $this->tagGit();
+        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -131,7 +131,7 @@ class Version
     {
         $this->setMinor($this->minor + 1);
 
-        $tagGit ?? $this->tagGit();
+        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -149,7 +149,7 @@ class Version
         $this->patch = 0;
         $this->preRelease = null;
 
-        $tagGit ?? $this->tagGit();
+        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -165,7 +165,7 @@ class Version
     {
         $this->setPatch($this->patch + 1);
 
-        $tagGit ?? $this->tagGit();
+        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -182,7 +182,7 @@ class Version
         $this->patch = $value;
         $this->preRelease = null;
 
-        $tagGit ?? $this->tagGit();
+        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -198,7 +198,7 @@ class Version
     {
         $this->preRelease = $value;
 
-        $tagGit ?? $this->tagGit();
+        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -214,7 +214,7 @@ class Version
     {
         $this->build = $value;
 
-        $tagGit ?? $this->tagGit();
+        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
