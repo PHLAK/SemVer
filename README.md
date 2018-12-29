@@ -103,6 +103,19 @@ $version1->gte($version2); // false
 $version1->lte($version2); // true
 ```
 
+#### Tag Git Branch with SemVer
+
+```php
+$version = new SemVer\Version();
+
+$version->setVersion('v1.2.3', true);  // v1.2.3 git tag: v1.2.3
+$version->setMajor(3);           // v1.2.3 -> v3.0.0 git tag: v3.0.0
+$version->setMinor(5);           // v1.2.3 -> v1.5.0 git tag: v1.5.0
+$version->setPatch(7);           // v1.2.3 -> 1.2.7 git tag: v1.2.7
+$version->setPreRelease('rc.2'); // v1.2.3 -> v1.2.3-rc.2 git tag: v1.2.3-rc.2
+$version->setBuild('007');       // v1.2.3 -> v1.2.3+007 git tag: v1.2.3+007
+```
+
 Troubleshooting
 ---------------
 
