@@ -2,10 +2,9 @@
 
 namespace PHLAK\SemVer;
 
-use function function_exists;
-use function shell_exec;
-use PHLAK\SemVer\Exceptions\GitTagException;
+use Exception;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
+use Cz\Git\GitRepository;
 
 class Version
 {
@@ -23,6 +22,9 @@ class Version
 
     /** @var string Build release value */
     protected $build;
+
+    /** @var git repo instance */
+    protected $repo;
 
     /**
      * Class constructor, runs on object creation.
@@ -66,7 +68,7 @@ class Version
      *
      * @return Version This Version object
      */
-    public function setVersion($version, bool $tagGit = false)
+    public function setVersion($version)
     {
         $semverRegex = '/^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Z-.]+))?(?:\+([0-9A-Z-.]+)?)?$/i';
 
@@ -80,8 +82,6 @@ class Version
         $this->preRelease = @$matches[4] ?: null;
         $this->build = @$matches[5] ?: null;
 
-        $tagGit ? $this->tagGit() : null;
-
         return $this;
     }
 
@@ -92,11 +92,9 @@ class Version
      *
      * @return Version This Version object
      */
-    public function incrementMajor(bool $tagGit = false)
+    public function incrementMajor()
     {
         $this->setMajor($this->major + 1);
-
-        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -108,14 +106,12 @@ class Version
      *
      * @return Version This Version object
      */
-    public function setMajor($value, bool $tagGit = false)
+    public function setMajor($value)
     {
         $this->major = $value;
         $this->minor = 0;
         $this->patch = 0;
         $this->preRelease = null;
-
-        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -127,11 +123,9 @@ class Version
      *
      * @return Version This Version object
      */
-    public function incrementMinor(bool $tagGit = false)
+    public function incrementMinor()
     {
         $this->setMinor($this->minor + 1);
-
-        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -143,13 +137,11 @@ class Version
      *
      * @return Version This Version object
      */
-    public function setMinor($value, bool $tagGit = false)
+    public function setMinor($value)
     {
         $this->minor = $value;
         $this->patch = 0;
         $this->preRelease = null;
-
-        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -161,11 +153,9 @@ class Version
      *
      * @return Version This Version object
      */
-    public function incrementPatch(bool $tagGit = false)
+    public function incrementPatch()
     {
         $this->setPatch($this->patch + 1);
-
-        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -177,12 +167,10 @@ class Version
      *
      * @return Version This Version object
      */
-    public function setPatch($value, bool $tagGit = false)
+    public function setPatch($value)
     {
         $this->patch = $value;
         $this->preRelease = null;
-
-        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -194,11 +182,9 @@ class Version
      *
      * @return Version This Version object
      */
-    public function setPreRelease($value, bool $tagGit = false)
+    public function setPreRelease($value)
     {
         $this->preRelease = $value;
-
-        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -210,11 +196,9 @@ class Version
      *
      * @return Version This Version object
      */
-    public function setBuild($value, bool $tagGit = false)
+    public function setBuild($value)
     {
         $this->build = $value;
-
-        $tagGit ? $this->tagGit() : null;
 
         return $this;
     }
@@ -349,20 +333,69 @@ class Version
     }
 
     /**
-     * Tag the git branch with the current prefixed version
+     * Tag Git repo with version
      *
+     * @author Joshua Young (jny986)
+     * @param $gitPath
+     * @param bool $prefix
      * @return bool
-     * @throws GitTagException
+     * @throws \Cz\Git\GitException
      */
-    protected function tagGit()
+    public function gitTag($gitPath = false, $prefix = false)
     {
-        if (function_exists('shell_exec')) {
-            if (!is_null(shell_exec('git tag ' . $this->prefix()))) {
-                throw new GitTagException('Failed to set tag for current Git Branch');
-            }
-            return true;
+        $gitPath ?: $gitPath = __DIR__ . '/../../../../..';
+        if (!isset($this->repo) || empty($this->repo)) {
+            $this->initGitRepo($gitPath);
         }
-        throw new GitTagException('Unable to set Git Tag as shell_exec is disabled');
+        $version = $this->prefix($prefix ?: '');
+        if (!in_array($version, $this->gitTags($gitPath))) {
+            $result = $this->repo->createTag($version);
+            if ($result instanceof Exception) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Get all tags for the Git repo
+     *
+     * @author Joshua Young (jny986)
+     * @param bool $gitPath
+     * @return bool
+     * @throws \Cz\Git\GitException
+     */
+    public function gitTags($gitPath = false)
+    {
+        if (!isset($this->repo) || empty($this->repo)) {
+            $this->initGitRepo($gitPath);
+        }
+        $result = $this->repo->getTags();
+        if ($result instanceof Exception) {
+            return false;
+        }
+        return $result;
+    }
+
+    /**
+     * Remove Git tag from repository
+     *
+     * @author Joshua Young (jny986)
+     * @param bool $gitPath
+     * @param bool $prefix
+     * @return bool
+     * @throws \Cz\Git\GitException
+     */
+    public function gitTagRemove($gitPath = false, $prefix = false)
+    {
+        if (!isset($this->repo) || empty($this->repo)) {
+            $this->initGitRepo($gitPath);
+        }
+        $result = $this->repo->removeTag($this->prefix($prefix ?: ''));
+        if ($result instanceof Exception) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -375,8 +408,26 @@ class Version
         $version = implode('.', [$this->major, $this->minor, $this->patch]);
         $version .= isset($this->preRelease) ? '-' . $this->preRelease : null;
         $version .= isset($this->build) ? '+' . $this->build : null;
-
         return $version;
+    }
+
+    /**
+     * Initiate Git repo Instance
+     *
+     * @author Joshua Young (jny986)
+     * @param $gitPath
+     * @return bool
+     * @throws \Cz\Git\GitException
+     */
+    protected function initGitRepo($gitPath)
+    {
+        $gitPath ?: $gitPath = __DIR__ . '/../../../../..';
+        $repo = new GitRepository($gitPath);
+        if ($repo instanceof Exception) {
+            return false;
+        }
+        $this->repo = $repo;
+        return true;
     }
 
 

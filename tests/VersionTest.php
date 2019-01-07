@@ -2,6 +2,7 @@
 
 namespace PHLAK\SemVer\Tests;
 
+use Cz\Git\GitRepository;
 use PHLAK\SemVer;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHPUnit\Framework\TestCase;
@@ -174,74 +175,11 @@ class VersionTest extends TestCase
         $this->assertFalse($this->version->lte(new SemVer\Version('v1.2.3')));
     }
 
-    public function test_it_can_tag_git_with_version()
+    public function test_it_can_tag_git_version()
     {
-        $this->version->setVersion('v2.4.48', true);
-        $this->assertEquals(preg_replace('/\r\n|\r|\n/', '', (string) shell_exec('git describe --tags')), (string) $this->version->prefix());
-        $this->assertFalse(is_null(shell_exec('git tag --delete ' . $this->version->prefix())));
-    }
+        $this->version->setVersion('v2.4.48', true)->gitTag(__DIR__ . '/..', 'v');
+        $this->assertContains($this->version->prefix(), $this->version->gitTags());
+        $this->version->gitTagRemove(__DIR__ . '/..', 'v');
 
-    public function test_it_can_tag_git_with_major_increment()
-    {
-        $this->version->setVersion('v2.4.48');
-        $this->version->incrementMajor(true);
-        $this->assertEquals(preg_replace('/\r\n|\r|\n/', '', (string) shell_exec('git describe --tags')), (string) $this->version->prefix());
-        $this->assertFalse(is_null(shell_exec('git tag --delete ' . $this->version->prefix())));
-    }
-
-    public function test_it_can_tag_git_with_major_set()
-    {
-        $this->version->setVersion('v2.4.48');
-        $this->version->setMajor(3, true);
-        $this->assertEquals(preg_replace('/\r\n|\r|\n/', '', (string) shell_exec('git describe --tags')), (string) $this->version->prefix());
-        $this->assertFalse(is_null(shell_exec('git tag --delete ' . $this->version->prefix())));
-    }
-
-    public function test_it_can_tag_git_with_minor_increment()
-    {
-        $this->version->setVersion('v2.4.48');
-        $this->version->incrementMinor(true);
-        $this->assertEquals(preg_replace('/\r\n|\r|\n/', '', (string) shell_exec('git describe --tags')), (string) $this->version->prefix());
-        $this->assertFalse(is_null(shell_exec('git tag --delete ' . $this->version->prefix())));
-    }
-
-    public function test_it_can_tag_git_with_minor_set()
-    {
-        $this->version->setVersion('v2.4.48');
-        $this->version->setMinor(5, true);
-        $this->assertEquals(preg_replace('/\r\n|\r|\n/', '', (string) shell_exec('git describe --tags')), (string) $this->version->prefix());
-        $this->assertFalse(is_null(shell_exec('git tag --delete ' . $this->version->prefix())));
-    }
-
-    public function test_it_can_tag_git_with_patch_increment()
-    {
-        $this->version->setVersion('v2.4.48');
-        $this->version->incrementPatch(true);
-        $this->assertEquals(preg_replace('/\r\n|\r|\n/', '', (string) shell_exec('git describe --tags')), (string) $this->version->prefix());
-        $this->assertFalse(is_null(shell_exec('git tag --delete ' . $this->version->prefix())));
-    }
-
-    public function test_it_can_tag_git_with_patch_set()
-    {
-        $this->version->setVersion('v2.4.48');
-        $this->version->setPatch(50, true);
-        $this->assertEquals(preg_replace('/\r\n|\r|\n/', '', (string) shell_exec('git describe --tags')), (string) $this->version->prefix());
-        $this->assertFalse(is_null(shell_exec('git tag --delete ' . $this->version->prefix())));
-    }
-
-    public function test_it_can_tag_git_with_pre_release_set()
-    {
-        $this->version->setVersion('v2.4.48');
-        $this->version->setPreRelease('.alpha1', true);
-        $this->assertEquals(preg_replace('/\r\n|\r|\n/', '', (string) shell_exec('git describe --tags')), (string) $this->version->prefix());
-        $this->assertFalse(is_null(shell_exec('git tag --delete ' . $this->version->prefix())));
-    }
-
-    public function test_it_can_tag_git_with_build_set()
-    {
-        $this->version->setVersion('v2.4.48');
-        $this->version->setPreRelease(102, true);
-        $this->assertEquals(preg_replace('/\r\n|\r|\n/', '', (string) shell_exec('git describe --tags')), (string) $this->version->prefix());
-        $this->assertFalse(is_null(shell_exec('git tag --delete ' . $this->version->prefix())));
     }
 }
