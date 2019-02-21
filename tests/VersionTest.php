@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class VersionTest extends TestCase
 {
-    public function setUp()
+    protected function setUp()
     {
         $this->version = new SemVer\Version('v1.3.37');
     }
