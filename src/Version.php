@@ -2,10 +2,14 @@
 
 namespace PHLAK\SemVer;
 
+use PHLAK\SemVer\Traits\Comparable;
+use PHLAK\SemVer\Traits\Incrementable;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 
 class Version
 {
+    use Comparable, Incrementable;
+
     /** @var int Major release number */
     protected $major;
 
@@ -82,18 +86,6 @@ class Version
     }
 
     /**
-     * Increment the major version value by one.
-     *
-     * @return self This Version object
-     */
-    public function incrementMajor() : self
-    {
-        $this->setMajor($this->major + 1);
-
-        return $this;
-    }
-
-    /**
      * Set the major version to a custom value.
      *
      * @param int $value Positive integer value
@@ -112,18 +104,6 @@ class Version
     }
 
     /**
-     * Increment the minor version value by one.
-     *
-     * @return self This Version object
-     */
-    public function incrementMinor() : self
-    {
-        $this->setMinor($this->minor + 1);
-
-        return $this;
-    }
-
-    /**
      * Set the minor version to a custom value.
      *
      * @param int $value Positive integer value
@@ -136,18 +116,6 @@ class Version
         $this->patch = 0;
         $this->preRelease = null;
         $this->build = null;
-
-        return $this;
-    }
-
-    /**
-     * Increment the patch version value by one.
-     *
-     * @return self This Version object
-     */
-    public function incrementPatch() : self
-    {
-        $this->setPatch($this->patch + 1);
 
         return $this;
     }
@@ -194,102 +162,6 @@ class Version
         $this->build = $value;
 
         return $this;
-    }
-
-    /**
-     * Check if this Version object is greater than another.
-     *
-     * @param Version $version An instance of SemVer/Version
-     *
-     * @return bool True if this Version object is greater than the comparing
-     *              object, otherwise false
-     */
-    public function gt(Version $version) : bool
-    {
-        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
-        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
-
-        return ($thisVersion <=> $thatVersion) == 1;
-    }
-
-    /**
-     * Check if this Version object is less than another.
-     *
-     * @param Version $version An instance of SemVer/Version
-     *
-     * @return bool True if this Version object is less than the comparing
-     *              object, otherwise false
-     */
-    public function lt(Version $version) : bool
-    {
-        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
-        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
-
-        return ($thisVersion <=> $thatVersion) == -1;
-    }
-
-    /**
-     * Check if this Version object is equal to than another.
-     *
-     * @param Version $version An instance of SemVer/Version
-     *
-     * @return bool True if this Version object is equal to the comparing
-     *              object, otherwise false
-     */
-    public function eq(Version $version) : bool
-    {
-        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
-        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
-
-        return ($thisVersion <=> $thatVersion) == 0;
-    }
-
-    /**
-     * Check if this Version object is not equal to another.
-     *
-     * @param Version $version An instance of SemVer/Version
-     *
-     * @return bool True if this Version object is not equal to the comparing
-     *              object, otherwise false
-     */
-    public function neq(Version $version) : bool
-    {
-        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
-        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
-
-        return ($thisVersion <=> $thatVersion) != 0;
-    }
-
-    /**
-     * Check if this Version object is greater than or equal to another.
-     *
-     * @param Version $version An instance of SemVer/Version
-     *
-     * @return bool True if this Version object is greater than or equal to the
-     *              comparing object, otherwise false
-     */
-    public function gte(Version $version) : bool
-    {
-        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
-        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
-
-        return ($thisVersion <=> $thatVersion) >= 0;
-    }
-
-    /**
-     * Check if this Version object is less than or equal to another.
-     *
-     * @param Version $version An instance of SemVer/Version
-     *
-     * @return bool True if this Version object is less than or equal to the
-     *              comparing object, otherwise false
-     */
-    public function lte(Version $version) : bool
-    {
-        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
-        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
-
-        return ($thisVersion <=> $thatVersion) <= 0;
     }
 
     /**
