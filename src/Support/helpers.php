@@ -4,7 +4,7 @@ use PHLAK\SemVer\Version;
 
 if (! function_exists('semver')) {
     /**
-    * Create a SemVer version object.
+     * Create a SemVer version object.
      *
      * @return \PHLAK\SemVer\Versioin
      */
