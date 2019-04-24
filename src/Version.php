@@ -206,26 +206,10 @@ class Version
      */
     public function gt(Version $version) : bool
     {
-        if ($this->major > $version->major) {
-            return true;
-        }
+        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
+        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
 
-        if ($this->major == $version->major
-            && $this->minor > $version->minor
-        ) {
-            return true;
-        }
-
-        if ($this->major == $version->major
-            && $this->minor == $version->minor
-            && $this->patch > $version->patch
-        ) {
-            return true;
-        }
-
-        // TODO: Check pre-release tag
-
-        return false;
+        return ($thisVersion <=> $thatVersion) == 1;
     }
 
     /**
@@ -238,26 +222,10 @@ class Version
      */
     public function lt(Version $version) : bool
     {
-        if ($this->major < $version->major) {
-            return true;
-        }
+        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
+        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
 
-        if ($this->major == $version->major
-            && $this->minor < $version->minor
-        ) {
-            return true;
-        }
-
-        if ($this->major == $version->major
-            && $this->minor == $version->minor
-            && $this->patch < $version->patch
-        ) {
-            return true;
-        }
-
-        // TODO: Check pre-release tag
-
-        return false;
+        return ($thisVersion <=> $thatVersion) == -1;
     }
 
     /**
@@ -270,7 +238,10 @@ class Version
      */
     public function eq(Version $version) : bool
     {
-        return $this == $version;
+        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
+        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
+
+        return ($thisVersion <=> $thatVersion) == 0;
     }
 
     /**
@@ -283,7 +254,10 @@ class Version
      */
     public function neq(Version $version) : bool
     {
-        return $this != $version;
+        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
+        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
+
+        return ($thisVersion <=> $thatVersion) != 0;
     }
 
     /**
@@ -296,7 +270,10 @@ class Version
      */
     public function gte(Version $version) : bool
     {
-        return $this->gt($version) || $this->eq($version);
+        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
+        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
+
+        return ($thisVersion <=> $thatVersion) >= 0;
     }
 
     /**
@@ -309,7 +286,10 @@ class Version
      */
     public function lte(Version $version) : bool
     {
-        return $this->lt($version) || $this->eq($version);
+        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
+        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
+
+        return ($thisVersion <=> $thatVersion) <= 0;
     }
 
     /**
