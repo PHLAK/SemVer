@@ -66,7 +66,7 @@ class Version
      */
     public function setVersion(string $version) : self
     {
-        $semverRegex = '/^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Z-.]+))?(?:\+([0-9A-Z-.]+)?)?$/i';
+        $semverRegex = '/^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z-.]+))?(?:\+([0-9A-Za-z-.]+)?)?$/';
 
         if (! preg_match($semverRegex, $version, $matches)) {
             throw new InvalidVersionException('Invalid Semantic Version string provided');
