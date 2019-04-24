@@ -18,7 +18,7 @@ class Version
     /** @var string|null Pre-release value */
     protected $preRelease;
 
-    /** @var string Build release value */
+    /** @var string|null Build release value */
     protected $build;
 
     /**
@@ -26,7 +26,7 @@ class Version
      *
      * @param string $version Version string
      */
-    public function __construct($version = '0.1.0')
+    public function __construct(string $version = '0.1.0')
     {
         $this->setVersion($version);
     }
@@ -38,7 +38,7 @@ class Version
      *
      * @return mixed Version property value
      */
-    public function __get($property)
+    public function __get(string $property)
     {
         return $this->$property;
     }
@@ -48,7 +48,7 @@ class Version
      *
      * @return string Current version string
      */
-    public function __toString()
+    public function __toString() : string
     {
         $version = implode('.', [$this->major, $this->minor, $this->patch]);
         $version .= isset($this->preRelease) ? '-' . $this->preRelease : null;
@@ -62,9 +62,9 @@ class Version
      *
      * @param string $version Version string
      *
-     * @return Version This Version object
+     * @return self This Version object
      */
-    public function setVersion($version)
+    public function setVersion(string $version) : self
     {
         $semverRegex = '/^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Z-.]+))?(?:\+([0-9A-Z-.]+)?)?$/i';
 
@@ -84,9 +84,9 @@ class Version
     /**
      * Increment the major version value by one.
      *
-     * @return Version This Version object
+     * @return self This Version object
      */
-    public function incrementMajor()
+    public function incrementMajor() : self
     {
         $this->setMajor($this->major + 1);
 
@@ -98,9 +98,9 @@ class Version
      *
      * @param int $value Positive integer value
      *
-     * @return Version This Version object
+     * @return self This Version object
      */
-    public function setMajor($value)
+    public function setMajor(int $value) : self
     {
         $this->major = $value;
         $this->minor = 0;
@@ -113,9 +113,9 @@ class Version
     /**
      * Increment the minor version value by one.
      *
-     * @return Version This Version object
+     * @return self This Version object
      */
-    public function incrementMinor()
+    public function incrementMinor() : self
     {
         $this->setMinor($this->minor + 1);
 
@@ -127,9 +127,9 @@ class Version
      *
      * @param int $value Positive integer value
      *
-     * @return Version This Version object
+     * @return self This Version object
      */
-    public function setMinor($value)
+    public function setMinor(int $value) : self
     {
         $this->minor = $value;
         $this->patch = 0;
@@ -141,9 +141,9 @@ class Version
     /**
      * Increment the patch version value by one.
      *
-     * @return Version This Version object
+     * @return self This Version object
      */
-    public function incrementPatch()
+    public function incrementPatch() : self
     {
         $this->setPatch($this->patch + 1);
 
@@ -155,9 +155,9 @@ class Version
      *
      * @param int $value Positive integer value
      *
-     * @return Version This Version object
+     * @return self This Version object
      */
-    public function setPatch($value)
+    public function setPatch(int $value) : self
     {
         $this->patch = $value;
         $this->preRelease = null;
@@ -168,11 +168,11 @@ class Version
     /**
      * Set the pre-release string to a custom value.
      *
-     * @param string $value A new pre-release value
+     * @param string|null $value A new pre-release value
      *
-     * @return Version This Version object
+     * @return self This Version object
      */
-    public function setPreRelease($value)
+    public function setPreRelease($value) : self
     {
         $this->preRelease = $value;
 
@@ -182,11 +182,11 @@ class Version
     /**
      * Set the build string to a custom value.
      *
-     * @param string $value A new build value
+     * @param string|null $value A new build value
      *
-     * @return Version This Version object
+     * @return self This Version object
      */
-    public function setBuild($value)
+    public function setBuild($value) : self
     {
         $this->build = $value;
 
@@ -201,7 +201,7 @@ class Version
      * @return bool True if this Version object is greater than the comparing
      *              object, otherwise false
      */
-    public function gt(Version $version)
+    public function gt(Version $version) : bool
     {
         if ($this->major > $version->major) {
             return true;
@@ -233,7 +233,7 @@ class Version
      * @return bool True if this Version object is less than the comparing
      *              object, otherwise false
      */
-    public function lt(Version $version)
+    public function lt(Version $version) : bool
     {
         if ($this->major < $version->major) {
             return true;
@@ -265,7 +265,7 @@ class Version
      * @return bool True if this Version object is equal to the comparing
      *              object, otherwise false
      */
-    public function eq(Version $version)
+    public function eq(Version $version) : bool
     {
         return $this == $version;
     }
@@ -278,7 +278,7 @@ class Version
      * @return bool True if this Version object is not equal to the comparing
      *              object, otherwise false
      */
-    public function neq(Version $version)
+    public function neq(Version $version) : bool
     {
         return $this != $version;
     }
@@ -291,7 +291,7 @@ class Version
      * @return bool True if this Version object is greater than or equal to the
      *              comparing object, otherwise false
      */
-    public function gte(Version $version)
+    public function gte(Version $version) : bool
     {
         return $this->gt($version) || $this->eq($version);
     }
@@ -304,7 +304,7 @@ class Version
      * @return bool True if this Version object is less than or equal to the
      *              comparing object, otherwise false
      */
-    public function lte(Version $version)
+    public function lte(Version $version) : bool
     {
         return $this->lt($version) || $this->eq($version);
     }
@@ -317,7 +317,7 @@ class Version
      *
      * @return string Prefixed version string
      */
-    public function prefix($prefix = 'v')
+    public function prefix($prefix = 'v') : string
     {
         return $prefix . $this->toString();
     }
@@ -327,7 +327,7 @@ class Version
      *
      * @return string Current version string
      */
-    private function toString()
+    private function toString() : string
     {
         return (string) $this;
     }
