@@ -106,6 +106,7 @@ class Version
         $this->minor = 0;
         $this->patch = 0;
         $this->preRelease = null;
+        $this->build = null;
 
         return $this;
     }
@@ -134,6 +135,7 @@ class Version
         $this->minor = $value;
         $this->patch = 0;
         $this->preRelease = null;
+        $this->build = null;
 
         return $this;
     }
@@ -161,6 +163,7 @@ class Version
     {
         $this->patch = $value;
         $this->preRelease = null;
+        $this->build = null;
 
         return $this;
     }

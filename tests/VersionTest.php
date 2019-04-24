@@ -173,4 +173,53 @@ class VersionTest extends TestCase
         $this->assertTrue($this->version->lte(new SemVer\Version('v1.3.37')));
         $this->assertFalse($this->version->lte(new SemVer\Version('v1.2.3')));
     }
+
+    public function test_setting_the_major_version_resets_appropriate_properties()
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5+007');
+        $version->setMajor(2);
+
+        $this->assertEquals(2, $version->major);
+        $this->assertEquals(0, $version->minor);
+        $this->assertEquals(0, $version->patch);
+        $this->assertNull($version->preRelease);
+        $this->assertNull($version->build);
+    }
+
+    public function test_setting_the_minor_version_resets_appropriate_properties()
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5+007');
+        $version->setMinor(4);
+
+        $this->assertEquals(1, $version->major);
+        $this->assertEquals(4, $version->minor);
+        $this->assertEquals(0, $version->patch);
+        $this->assertNull($version->preRelease);
+        $this->assertNull($version->build);
+    }
+
+    public function test_setting_the_patch_version_resets_appropriate_properties()
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5+007');
+        $version->setPatch(38);
+
+        $this->assertEquals(1, $version->major);
+        $this->assertEquals(3, $version->minor);
+        $this->assertEquals(38, $version->patch);
+        $this->assertNull($version->preRelease);
+        $this->assertNull($version->build);
+    }
+
+    public function test_it_ignores_the_build_version_when_comparing_versions()
+    {
+        $oldBuild = new SemVer\Version('v1.3.37-alpha.5+006');
+        $newBuild = new SemVer\Version('v1.3.37-alpha.5+007');
+
+        $this->assertTrue($oldBuild->eq($newBuild));
+        $this->assertFalse($oldBuild->neq($newBuild));
+        $this->assertFalse($oldBuild->gt($newBuild));
+        $this->assertFalse($oldBuild->lt($newBuild));
+        $this->assertTrue($oldBuild->gte($newBuild));
+        $this->assertTrue($oldBuild->lte($newBuild));
+    }
 }
