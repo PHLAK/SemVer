@@ -29,5 +29,9 @@
         "psr-4": {
             "PHLAK\\Semver\\Tests\\": "tests/"
         }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }
