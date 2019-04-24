@@ -46,14 +46,15 @@ class Version
     /**
      * Magic toString method; allows object interaction as if it were a string.
      *
-     * @param string $prefix Prefix the version string with a custom string
-     *                       (default: 'v')
-     *
      * @return string Current version string
      */
     public function __toString()
     {
-        return $this->toString();
+        $version = implode('.', [$this->major, $this->minor, $this->patch]);
+        $version .= isset($this->preRelease) ? '-' . $this->preRelease : null;
+        $version .= isset($this->build) ? '+' . $this->build : null;
+
+        return $version;
     }
 
     /**
@@ -328,10 +329,6 @@ class Version
      */
     private function toString()
     {
-        $version = implode('.', [$this->major, $this->minor, $this->patch]);
-        $version .= isset($this->preRelease) ? '-' . $this->preRelease : null;
-        $version .= isset($this->build) ? '+' . $this->build : null;
-
-        return $version;
+        return (string) $this;
     }
 }
