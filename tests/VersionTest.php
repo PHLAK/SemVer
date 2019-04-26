@@ -231,6 +231,18 @@ class VersionTest extends TestCase
         $this->assertNull($version->build);
     }
 
+    public function test_it_compares_pre_release_tags()
+    {
+        $alpha = new SemVer\Version('v1.3.37-alpha');
+        $beta = new SemVer\Version('v1.3.37-beta');
+
+        $this->assertTrue($alpha->lt($beta));
+        $this->assertFalse($alpha->gt($beta));
+        $this->assertTrue($alpha->lte($beta));
+        $this->assertFalse($alpha->gte($beta));
+        $this->assertFalse($alpha->eq($beta));
+    }
+
     public function test_it_ignores_the_build_version_when_comparing_versions()
     {
         $oldBuild = new SemVer\Version('v1.3.37-alpha.5+006');
