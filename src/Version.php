@@ -79,8 +79,8 @@ class Version
         $this->major = (int) $matches[1];
         $this->minor = (int) $matches[2];
         $this->patch = (int) $matches[3];
-        $this->preRelease = @$matches[4] ?: null;
-        $this->build = @$matches[5] ?: null;
+        $this->preRelease = $matches[4] ?? null;
+        $this->build = $matches[5] ?? null;
 
         return $this;
     }
