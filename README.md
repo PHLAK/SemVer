@@ -16,7 +16,8 @@ SemVer
 </p>
 
 <p align="center">
-  <a href="http://semver.org">Semantic versioning</a> helper library for PHP -- by, <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a>
+  <a href="http://semver.org">Semantic versioning</a> helper library for PHP
+  -- by, <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a> (<a href="https://twitter.com/PHLAK">@PHLAK</a>)
 </p>
 
 Introduction
