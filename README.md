@@ -1,30 +1,33 @@
 SemVer
 ======
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/PHLAK/SemVer.svg)](https://packagist.org/packages/PHLAK/SemVer)
-[![Total Downloads](https://img.shields.io/packagist/dt/PHLAK/SemVer.svg)](https://packagist.org/packages/PHLAK/SemVer)
-[![Author](https://img.shields.io/badge/author-Chris%20Kankiewicz-blue.svg)](https://www.ChrisKankiewicz.com)
-[![License](https://img.shields.io/packagist/l/PHLAK/SemVer.svg)](https://packagist.org/packages/PHLAK/SemVer)
-[![Build Status](https://img.shields.io/travis/PHLAK/SemVer.svg)](https://travis-ci.org/PHLAK/SemVer)
+<p align="center">
+  <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/v/PHLAK/SemVer.svg" alt="Latest Stable Version"></a>
+  <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/dt/PHLAK/SemVer.svg" alt="Total Downloads"></a>
+  <a href="https://www.ChrisKankiewicz.com"><img src="https://img.shields.io/badge/author-Chris%20Kankiewicz-blue.svg" alt="Author"></a>
+  <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/l/PHLAK/SemVer.svg" alt="License"></a>
+  <a href="https://travis-ci.org/PHLAK/SemVer"><img src="https://img.shields.io/travis/PHLAK/SemVer.svg" alt="Build Status"></a>
+  <a href="https://styleci.io/repos/95623990"><img src="https://styleci.io/repos/95623990/shield?branch=master&style=flat" alt="StyleCI"></a>
+  <br>
+  <a href="https://join.slack.com/t/phlaknet/shared_invite/enQtNzk0ODkwMDA2MDg0LWI4NDAyZGRlMWEyMWNhZmJmZjgzM2Y2YTdhNmZlYzc3OGNjZWU5MDNkMTcwMWQ5OGI5ODFmMjI5OWVkZTliN2M"><img src="https://img.shields.io/badge/Join_our-Slack-611f69.svg" alt="Join our"></a>
+  <a href="https://github.com/users/PHLAK/sponsorship"><img src="https://img.shields.io/badge/Become_a-Sponsor-0366d6.svg" alt="Become a Sponsor"></a>
+  <a href="https://patreon.com/PHLAK"><img src="https://img.shields.io/badge/Become_a-Patron-e7513b.svg" alt="Become a Patron"></a>
+  <a href="https://paypal.me/ChrisKankiewicz"><img src="https://img.shields.io/badge/Make_a-Donation-006bb6.svg" alt="One-time Donation"></a>
+</p>
 
-[Semantic versioning](http://semver.org) helper library for PHP -- by, [Chris Kankiewicz](https://www.ChrisKankiewicz.com)
+<p align="center">
+  <a href="http://semver.org">Semantic versioning</a> helper library for PHP -- by, <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a>
+</p>
 
 Introduction
 ------------
 
 Semantic versioning helper for PHP.
 
-#### Like this project?
-
-[![Join the community on Spectrum](https://img.shields.io/badge/Join_the_community-PHLAKNET-7a15fe.svg)](https://spectrum.chat/phlaknet)
-[![Become a Patron](https://img.shields.io/badge/Become_a-Patron-f96854.svg)](https://patreon.com/PHLAK)
-[![One-time Donation](https://img.shields.io/badge/Make_a-Donation-006bb6.svg)](https://paypal.me/ChrisKankiewicz)
-
 Requirements
 ------------
 
   - [PHP](https://php.net) >= 7.0
-
 
 Install with Composer
 ---------------------
