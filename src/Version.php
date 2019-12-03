@@ -55,8 +55,8 @@ class Version
     public function __toString() : string
     {
         $version = implode('.', [$this->major, $this->minor, $this->patch]);
-        $version .= isset($this->preRelease) ? '-' . $this->preRelease : null;
-        $version .= isset($this->build) ? '+' . $this->build : null;
+        $version .= isset($this->preRelease) ? '-' . $this->preRelease : '';
+        $version .= isset($this->build) ? '+' . $this->build : '';
 
         return $version;
     }
@@ -95,10 +95,7 @@ class Version
     public function setMajor(int $value) : self
     {
         $this->major = $value;
-        $this->minor = 0;
-        $this->patch = 0;
-        $this->preRelease = null;
-        $this->build = null;
+        $this->setMinor(0);
 
         return $this;
     }
@@ -113,9 +110,7 @@ class Version
     public function setMinor(int $value) : self
     {
         $this->minor = $value;
-        $this->patch = 0;
-        $this->preRelease = null;
-        $this->build = null;
+        $this->setPatch(0);
 
         return $this;
     }
@@ -130,8 +125,8 @@ class Version
     public function setPatch(int $value) : self
     {
         $this->patch = $value;
-        $this->preRelease = null;
-        $this->build = null;
+        $this->setPreRelease(null);
+        $this->setBuild(null);
 
         return $this;
     }
@@ -172,18 +167,8 @@ class Version
      *
      * @return string Prefixed version string
      */
-    public function prefix($prefix = 'v') : string
+    public function prefix(string $prefix = 'v') : string
     {
-        return $prefix . $this->toString();
-    }
-
-    /**
-     * Get the current version value as a string.
-     *
-     * @return string Current version string
-     */
-    private function toString() : string
-    {
-        return (string) $this;
+        return $prefix . (string) $this;
     }
 }
