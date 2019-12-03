@@ -33,7 +33,7 @@ Semantic versioning helper for PHP.
 Requirements
 ------------
 
-  - [PHP](https://php.net) >= 7.0
+  - [PHP](https://php.net) >= 7.1
 
 Install with Composer
 ---------------------
