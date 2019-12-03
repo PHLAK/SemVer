@@ -8,7 +8,8 @@ use PHLAK\SemVer\Traits\Incrementable;
 
 class Version
 {
-    use Comparable, Incrementable;
+    use Comparable;
+    use Incrementable;
 
     /** @var int Major release number */
     protected $major;

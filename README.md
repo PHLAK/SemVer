@@ -2,6 +2,11 @@ SemVer
 ======
 
 <p align="center">
+  <img src="semver.png" alt="SemVer" width="50%">
+</p>
+
+
+<p align="center">
   <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/v/PHLAK/SemVer.svg" alt="Latest Stable Version"></a>
   <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/dt/PHLAK/SemVer.svg" alt="Total Downloads"></a>
   <a href="https://www.ChrisKankiewicz.com"><img src="https://img.shields.io/badge/author-Chris%20Kankiewicz-blue.svg" alt="Author"></a>
@@ -116,7 +121,7 @@ $version1->lte($version2); // true
 Troubleshooting
 ---------------
 
-For general help and support join our [Spectrum community](https://spectrum.chat/phlaknet).
+For general help and support join our [Slack Workspace](https://join.slack.com/t/phlaknet/shared_invite/enQtNzk0ODkwMDA2MDg0LWI4NDAyZGRlMWEyMWNhZmJmZjgzM2Y2YTdhNmZlYzc3OGNjZWU5MDNkMTcwMWQ5OGI5ODFmMjI5OWVkZTliN2M).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/SemVer/issues).
 
