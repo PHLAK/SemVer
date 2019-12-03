@@ -2,9 +2,9 @@
 
 namespace PHLAK\SemVer;
 
+use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHLAK\SemVer\Traits\Comparable;
 use PHLAK\SemVer\Traits\Incrementable;
-use PHLAK\SemVer\Exceptions\InvalidVersionException;
 
 class Version
 {
@@ -36,7 +36,7 @@ class Version
     }
 
     /**
-     * Magic get method; privied access to version properties.
+     * Magic get method; provides access to version properties.
      *
      * @param string $property Version property
      *

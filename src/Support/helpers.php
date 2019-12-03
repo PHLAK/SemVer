@@ -6,7 +6,7 @@ if (! function_exists('semver')) {
     /**
      * Create a SemVer version object.
      *
-     * @return \PHLAK\SemVer\Versioin
+     * @return \PHLAK\SemVer\Version
      */
     function semver(string $string) : Version
     {

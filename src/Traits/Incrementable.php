@@ -2,8 +2,6 @@
 
 namespace PHLAK\SemVer\Traits;
 
-use PHLAK\SemVer\Version;
-
 trait Incrementable
 {
     /**
