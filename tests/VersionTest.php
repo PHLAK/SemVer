@@ -255,4 +255,47 @@ class VersionTest extends TestCase
         $this->assertTrue($oldBuild->gte($newBuild));
         $this->assertTrue($oldBuild->lte($newBuild));
     }
+
+    /**
+     * @param $release
+     * @param $prerelease
+     *
+     * @dataProvider versions_provider
+     */
+    public function test_it_compares_pre_release_tags_vs_release($release, $prerelease)
+    {
+        $release = new SemVer\Version($release);
+        $prerelease = new SemVer\Version($prerelease);
+
+        $this->assertFalse($release->eq($prerelease));
+        $this->assertFalse($release->lt($prerelease));
+        $this->assertFalse($release->lte($prerelease));
+        $this->assertTrue($release->gt($prerelease));
+        $this->assertTrue($release->gte($prerelease));
+
+        $this->assertFalse($prerelease->gt($release));
+        $this->assertFalse($prerelease->eq($release));
+        $this->assertFalse($prerelease->gte($release));
+        $this->assertTrue($prerelease->lt($release));
+        $this->assertTrue($prerelease->lte($release));
+    }
+
+    public function versions_provider()
+    {
+        $versions = [];
+        $versions[] = ['v1.3.37', 'v1.3.37-alpha'];
+        $versions[] = ['v1.3.37', 'v1.3.37-alpha.5+007'];
+        $versions[] = ['v1.3.0', 'v1.3.0-beta'];
+        $versions[] = ['v1.0.0', 'v1.0.0-rc1'];
+        //test case from http::/semver.org
+        $versions[] = ['1.0.0', '1.0.0-rc.1'];
+        $versions[] = ['1.0.0-rc.1', '1.0.0-beta.11'];
+        $versions[] = ['1.0.0-beta.11', '1.0.0-beta.2'];
+        $versions[] = ['1.0.0-beta.2', '1.0.0-beta'];
+        $versions[] = ['1.0.0-beta', '1.0.0-alpha.beta'];
+        $versions[] = ['1.0.0-alpha.beta', '1.0.0-alpha.1'];
+        $versions[] = ['1.0.0-alpha.1', '1.0.0-alpha'];
+
+        return $versions;
+    }
 }
