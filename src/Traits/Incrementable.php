@@ -9,7 +9,7 @@ trait Incrementable
      *
      * @return self This Version object
      */
-    public function incrementMajor() : self
+    public function incrementMajor(): self
     {
         $this->setMajor($this->major + 1);
 
@@ -21,7 +21,7 @@ trait Incrementable
      *
      * @return self This Version object
      */
-    public function incrementMinor() : self
+    public function incrementMinor(): self
     {
         $this->setMinor($this->minor + 1);
 
@@ -33,7 +33,7 @@ trait Incrementable
      *
      * @return self This Version object
      */
-    public function incrementPatch() : self
+    public function incrementPatch(): self
     {
         $this->setPatch($this->patch + 1);
 

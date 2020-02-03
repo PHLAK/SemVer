@@ -8,7 +8,7 @@ if (! function_exists('semver')) {
      *
      * @return \PHLAK\SemVer\Version
      */
-    function semver(string $string) : Version
+    function semver(string $string): Version
     {
         return new PHLAK\SemVer\Version($string);
     }

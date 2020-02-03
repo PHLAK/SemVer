@@ -14,7 +14,7 @@ trait Comparable
      * @return bool True if this Version object is greater than the comparing
      *              object, otherwise false
      */
-    public function gt(Version $version) : bool
+    public function gt(Version $version): bool
     {
         // compare without prerelease
         $thisVersion = [$this->major, $this->minor, $this->patch];
@@ -36,7 +36,7 @@ trait Comparable
      * @return bool True if this Version object is less than the comparing
      *              object, otherwise false
      */
-    public function lt(Version $version) : bool
+    public function lt(Version $version): bool
     {
         $thisVersion = [$this->major, $this->minor, $this->patch];
         $thatVersion = [$version->major, $version->minor, $version->patch];
@@ -57,7 +57,7 @@ trait Comparable
      * @return bool True if this Version object is equal to the comparing
      *              object, otherwise false
      */
-    public function eq(Version $version) : bool
+    public function eq(Version $version): bool
     {
         $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
         $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
@@ -73,7 +73,7 @@ trait Comparable
      * @return bool True if this Version object is not equal to the comparing
      *              object, otherwise false
      */
-    public function neq(Version $version) : bool
+    public function neq(Version $version): bool
     {
         $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
         $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
@@ -89,7 +89,7 @@ trait Comparable
      * @return bool True if this Version object is greater than or equal to the
      *              comparing object, otherwise false
      */
-    public function gte(Version $version) : bool
+    public function gte(Version $version): bool
     {
         $thisVersion = [$this->major, $this->minor, $this->patch];
         $thatVersion = [$version->major, $version->minor, $version->patch];
@@ -110,7 +110,7 @@ trait Comparable
      * @return bool True if this Version object is less than or equal to the
      *              comparing object, otherwise false
      */
-    public function lte(Version $version) : bool
+    public function lte(Version $version): bool
     {
         $thisVersion = [$this->major, $this->minor, $this->patch];
         $thatVersion = [$version->major, $version->minor, $version->patch];
@@ -131,7 +131,7 @@ trait Comparable
      *
      * @return int
      */
-    private function comparePreReleases($preRelease1, $preRelease2) : int
+    private function comparePreReleases($preRelease1, $preRelease2): int
     {
         if ($preRelease1 !== null && $preRelease2 === null) {
             return -1;

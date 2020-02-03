@@ -53,7 +53,7 @@ class Version
      *
      * @return string Current version string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         $version = implode('.', [$this->major, $this->minor, $this->patch]);
         $version .= isset($this->preRelease) ? '-' . $this->preRelease : '';
@@ -69,7 +69,7 @@ class Version
      *
      * @return self This Version object
      */
-    public function setVersion(string $version) : self
+    public function setVersion(string $version): self
     {
         $semverRegex = '/^v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<pre_release>[0-9A-Za-z-.]+))?(?:\+(?<build>[0-9A-Za-z-.]+)?)?$/';
 
@@ -93,7 +93,7 @@ class Version
      *
      * @return self This Version object
      */
-    public function setMajor(int $value) : self
+    public function setMajor(int $value): self
     {
         $this->major = $value;
         $this->setMinor(0);
@@ -108,7 +108,7 @@ class Version
      *
      * @return self This Version object
      */
-    public function setMinor(int $value) : self
+    public function setMinor(int $value): self
     {
         $this->minor = $value;
         $this->setPatch(0);
@@ -123,7 +123,7 @@ class Version
      *
      * @return self This Version object
      */
-    public function setPatch(int $value) : self
+    public function setPatch(int $value): self
     {
         $this->patch = $value;
         $this->setPreRelease(null);
@@ -139,7 +139,7 @@ class Version
      *
      * @return self This Version object
      */
-    public function setPreRelease($value) : self
+    public function setPreRelease($value): self
     {
         $this->preRelease = $value;
 
@@ -153,7 +153,7 @@ class Version
      *
      * @return self This Version object
      */
-    public function setBuild($value) : self
+    public function setBuild($value): self
     {
         $this->build = $value;
 
@@ -168,7 +168,7 @@ class Version
      *
      * @return string Prefixed version string
      */
-    public function prefix(string $prefix = 'v') : string
+    public function prefix(string $prefix = 'v'): string
     {
         return $prefix . (string) $this;
     }
