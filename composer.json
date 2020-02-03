@@ -13,7 +13,7 @@
         "issues": "https://github.com/PHLAK/SemVer/issues"
     },
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16.1",
