@@ -256,13 +256,8 @@ class VersionTest extends TestCase
         $this->assertTrue($oldBuild->lte($newBuild));
     }
 
-    /**
-     * @param $release
-     * @param $prerelease
-     *
-     * @dataProvider versions_provider
-     */
-    public function test_it_compares_pre_release_tags_vs_release($release, $prerelease)
+    /** @dataProvider pre_release_comparison_provider */
+    public function test_it_compares_pre_release_tags_vs_release(string $release, string $prerelease)
     {
         $release = new SemVer\Version($release);
         $prerelease = new SemVer\Version($prerelease);
@@ -280,22 +275,21 @@ class VersionTest extends TestCase
         $this->assertTrue($prerelease->lte($release));
     }
 
-    public function versions_provider()
+    public function pre_release_comparison_provider()
     {
-        $versions = [];
-        $versions[] = ['v1.3.37', 'v1.3.37-alpha'];
-        $versions[] = ['v1.3.37', 'v1.3.37-alpha.5+007'];
-        $versions[] = ['v1.3.0', 'v1.3.0-beta'];
-        $versions[] = ['v1.0.0', 'v1.0.0-rc1'];
-        //test case from http::/semver.org
-        $versions[] = ['1.0.0', '1.0.0-rc.1'];
-        $versions[] = ['1.0.0-rc.1', '1.0.0-beta.11'];
-        $versions[] = ['1.0.0-beta.11', '1.0.0-beta.2'];
-        $versions[] = ['1.0.0-beta.2', '1.0.0-beta'];
-        $versions[] = ['1.0.0-beta', '1.0.0-alpha.beta'];
-        $versions[] = ['1.0.0-alpha.beta', '1.0.0-alpha.1'];
-        $versions[] = ['1.0.0-alpha.1', '1.0.0-alpha'];
-
-        return $versions;
+        return [
+            ['v1.3.37', 'v1.3.37-alpha'],
+            ['v1.3.37', 'v1.3.37-alpha.5+007'],
+            ['v1.3.0', 'v1.3.0-beta'],
+            ['v1.0.0', 'v1.0.0-rc1'],
+            // Test cases from http://semver.org
+            ['1.0.0', '1.0.0-rc.1'],
+            ['1.0.0-rc.1', '1.0.0-beta.11'],
+            ['1.0.0-beta.11', '1.0.0-beta.2'],
+            ['1.0.0-beta.2', '1.0.0-beta'],
+            ['1.0.0-beta', '1.0.0-alpha.beta'],
+            ['1.0.0-alpha.beta', '1.0.0-alpha.1'],
+            ['1.0.0-alpha.1', '1.0.0-alpha'],
+        ];
     }
 }
