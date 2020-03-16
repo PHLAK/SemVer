@@ -1,5 +1,5 @@
-sudo: false
-
+os: linux
+dist: bionic
 language: php
 
 env:
@@ -13,7 +13,7 @@ php:
   - 7.4
   - nightly
 
-matrix:
+jobs:
   allow_failures:
     - php: nightly
 
@@ -22,10 +22,9 @@ cache:
     - $HOME/.composer/cache
     - vendor
 
-install: "[[ $COMPOSER_PREFER == 'lowest' ]] && composer update --prefer-lowest || composer update"
+install: "[[ $COMPOSER_PREFER == 'lowest' ]] && composer update --prefer-lowest || composer install"
 
-before_script:
+script:
   - vendor/bin/php-cs-fixer fix --diff --dry-run
   - vendor/bin/psalm
-
-script: vendor/bin/phpunit --coverage-text
+  - vendor/bin/phpunit --coverage-text
