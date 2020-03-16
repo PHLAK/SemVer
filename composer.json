@@ -9,6 +9,16 @@
             "email": "Chris@ChrisKankiewicz.com"
         }
     ],
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/PHLAK"
+        },
+        {
+            "type": "paypal",
+            "url": "https://paypal.me/ChrisKankiewicz"
+        }
+    ],
     "support": {
         "issues": "https://github.com/PHLAK/SemVer/issues"
     },
