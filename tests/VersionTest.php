@@ -8,28 +8,28 @@ use PHPUnit\Framework\TestCase;
 
 class VersionTest extends TestCase
 {
-    public function test_it_can_be_initialized()
+    public function test_it_can_be_initialized(): void
     {
         $version = new SemVer\Version('v1.3.37');
 
         $this->assertInstanceOf(SemVer\Version::class, $version);
     }
 
-    public function test_it_can_be_initialized_with_the_helper_function()
+    public function test_it_can_be_initialized_with_the_helper_function(): void
     {
         $version = semver('v1.3.37');
 
         $this->assertInstanceOf(SemVer\Version::class, $version);
     }
 
-    public function test_it_throws_a_runtime_exception_for_an_invalid_version()
+    public function test_it_throws_a_runtime_exception_for_an_invalid_version(): void
     {
         $this->expectException(InvalidVersionException::class);
 
         new SemVer\Version('not.a.version');
     }
 
-    public function test_it_can_set_and_retrieve_a_version()
+    public function test_it_can_set_and_retrieve_a_version(): void
     {
         $version = new SemVer\Version('v1.3.37');
         $version->setVersion('v2.4.48');
@@ -37,7 +37,7 @@ class VersionTest extends TestCase
         $this->assertEquals('2.4.48', (string) $version);
     }
 
-    public function test_it_can_return_a_prefixed_version_string()
+    public function test_it_can_return_a_prefixed_version_string(): void
     {
         $version = new SemVer\Version('v1.3.37');
 
@@ -45,14 +45,14 @@ class VersionTest extends TestCase
         $this->assertEquals('x1.3.37', $version->prefix('x'));
     }
 
-    public function test_it_can_be_cast_to_a_string()
+    public function test_it_can_be_cast_to_a_string(): void
     {
         $version = new SemVer\Version('v1.3.37');
 
         $this->assertEquals('1.3.37', (string) $version);
     }
 
-    public function test_it_can_get_individual_properties()
+    public function test_it_can_get_individual_properties(): void
     {
         $version = new SemVer\Version('v1.3.37-alpha.5+007');
 
@@ -63,7 +63,7 @@ class VersionTest extends TestCase
         $this->assertEquals('007', $version->build);
     }
 
-    public function test_it_can_increment_major()
+    public function test_it_can_increment_major(): void
     {
         $version = new SemVer\Version('v1.3.37');
         $version->incrementMajor();
@@ -71,7 +71,7 @@ class VersionTest extends TestCase
         $this->assertEquals('2.0.0', (string) $version);
     }
 
-    public function test_it_can_set_major()
+    public function test_it_can_set_major(): void
     {
         $version = new SemVer\Version('v1.3.37');
         $version->setMajor(7);
@@ -79,7 +79,7 @@ class VersionTest extends TestCase
         $this->assertEquals('7.0.0', (string) $version);
     }
 
-    public function test_it_can_increment_minor()
+    public function test_it_can_increment_minor(): void
     {
         $version = new SemVer\Version('v1.3.37');
         $version->incrementMinor();
@@ -87,7 +87,7 @@ class VersionTest extends TestCase
         $this->assertEquals('1.4.0', (string) $version);
     }
 
-    public function test_it_can_set_minor()
+    public function test_it_can_set_minor(): void
     {
         $version = new SemVer\Version('v1.3.37');
         $version->setMinor(5);
@@ -95,7 +95,7 @@ class VersionTest extends TestCase
         $this->assertEquals('1.5.0', (string) $version);
     }
 
-    public function test_it_can_increment_patch()
+    public function test_it_can_increment_patch(): void
     {
         $version = new SemVer\Version('v1.3.37');
         $version->incrementPatch();
@@ -103,7 +103,7 @@ class VersionTest extends TestCase
         $this->assertEquals('1.3.38', (string) $version);
     }
 
-    public function test_it_can_set_patch()
+    public function test_it_can_set_patch(): void
     {
         $version = new SemVer\Version('v1.3.37');
         $version->setPatch(12);
@@ -111,7 +111,7 @@ class VersionTest extends TestCase
         $this->assertEquals('1.3.12', (string) $version);
     }
 
-    public function test_it_can_set_pre_release()
+    public function test_it_can_set_pre_release(): void
     {
         $version = new SemVer\Version('v1.3.37');
         $version->setPreRelease('alpha.5');
@@ -119,14 +119,14 @@ class VersionTest extends TestCase
         $this->assertEquals('1.3.37-alpha.5', (string) $version);
     }
 
-    public function test_it_can_unset_pre_release()
+    public function test_it_can_unset_pre_release(): void
     {
         $version = (new SemVer\Version('v1.3.37-alpha.5'))->setPreRelease(null);
 
         $this->assertNull($version->preRelease);
     }
 
-    public function test_it_can_set_build()
+    public function test_it_can_set_build(): void
     {
         $version = new SemVer\Version('v1.3.37');
         $version->setBuild('007');
@@ -134,14 +134,14 @@ class VersionTest extends TestCase
         $this->assertEquals('1.3.37+007', (string) $version);
     }
 
-    public function test_it_can_unset_build()
+    public function test_it_can_unset_build(): void
     {
         $version = (new SemVer\Version('v1.3.37+007'))->setBuild(null);
 
         $this->assertNull($version->build);
     }
 
-    public function test_it_can_be_greater_than_another_semver_object()
+    public function test_it_can_be_greater_than_another_semver_object(): void
     {
         $version = new SemVer\Version('v1.3.37');
 
@@ -151,7 +151,7 @@ class VersionTest extends TestCase
         $this->assertFalse($version->gt(new SemVer\Version('v1.3.37')));
     }
 
-    public function test_it_can_be_less_than_another_semver_object()
+    public function test_it_can_be_less_than_another_semver_object(): void
     {
         $version = new SemVer\Version('v1.3.37');
 
@@ -161,7 +161,7 @@ class VersionTest extends TestCase
         $this->assertFalse($version->lt(new SemVer\Version('v1.3.37')));
     }
 
-    public function test_it_can_be_equal_to_another_semver_object()
+    public function test_it_can_be_equal_to_another_semver_object(): void
     {
         $version = new SemVer\Version('v1.3.37');
 
@@ -169,7 +169,7 @@ class VersionTest extends TestCase
         $this->assertFalse($version->eq(new SemVer\Version('v1.2.3')));
     }
 
-    public function test_it_can_be_not_equal_to_another_semver_object()
+    public function test_it_can_be_not_equal_to_another_semver_object(): void
     {
         $version = new SemVer\Version('v1.3.37');
 
@@ -177,7 +177,7 @@ class VersionTest extends TestCase
         $this->assertFalse($version->neq(new SemVer\Version('v1.3.37')));
     }
 
-    public function test_it_can_be_greater_than_or_equal_to_another_semver_object()
+    public function test_it_can_be_greater_than_or_equal_to_another_semver_object(): void
     {
         $version = new SemVer\Version('v1.3.37');
 
@@ -186,7 +186,7 @@ class VersionTest extends TestCase
         $this->assertFalse($version->gte(new SemVer\Version('v2.3.4')));
     }
 
-    public function test_it_can_be_less_than_or_equal_to_another_semver_object()
+    public function test_it_can_be_less_than_or_equal_to_another_semver_object(): void
     {
         $version = new SemVer\Version('v1.3.37');
 
@@ -195,7 +195,7 @@ class VersionTest extends TestCase
         $this->assertFalse($version->lte(new SemVer\Version('v1.2.3')));
     }
 
-    public function test_setting_the_major_version_resets_appropriate_properties()
+    public function test_setting_the_major_version_resets_appropriate_properties(): void
     {
         $version = new SemVer\Version('v1.3.37-alpha.5+007');
         $version->setMajor(2);
@@ -207,7 +207,7 @@ class VersionTest extends TestCase
         $this->assertNull($version->build);
     }
 
-    public function test_setting_the_minor_version_resets_appropriate_properties()
+    public function test_setting_the_minor_version_resets_appropriate_properties(): void
     {
         $version = new SemVer\Version('v1.3.37-alpha.5+007');
         $version->setMinor(4);
@@ -219,7 +219,7 @@ class VersionTest extends TestCase
         $this->assertNull($version->build);
     }
 
-    public function test_setting_the_patch_version_resets_appropriate_properties()
+    public function test_setting_the_patch_version_resets_appropriate_properties(): void
     {
         $version = new SemVer\Version('v1.3.37-alpha.5+007');
         $version->setPatch(38);
@@ -231,7 +231,7 @@ class VersionTest extends TestCase
         $this->assertNull($version->build);
     }
 
-    public function test_it_compares_pre_release_tags()
+    public function test_it_compares_pre_release_tags(): void
     {
         $alpha = new SemVer\Version('v1.3.37-alpha');
         $beta = new SemVer\Version('v1.3.37-beta');
@@ -243,7 +243,7 @@ class VersionTest extends TestCase
         $this->assertFalse($alpha->eq($beta));
     }
 
-    public function test_it_ignores_the_build_version_when_comparing_versions()
+    public function test_it_ignores_the_build_version_when_comparing_versions(): void
     {
         $oldBuild = new SemVer\Version('v1.3.37-alpha.5+006');
         $newBuild = new SemVer\Version('v1.3.37-alpha.5+007');
@@ -257,7 +257,7 @@ class VersionTest extends TestCase
     }
 
     /** @dataProvider pre_release_comparison_provider */
-    public function test_it_compares_pre_release_tags_vs_release(string $release, string $prerelease)
+    public function test_it_compares_pre_release_tags_vs_release(string $release, string $prerelease): void
     {
         $release = new SemVer\Version($release);
         $prerelease = new SemVer\Version($prerelease);
@@ -275,7 +275,7 @@ class VersionTest extends TestCase
         $this->assertTrue($prerelease->lte($release));
     }
 
-    public function pre_release_comparison_provider()
+    public function pre_release_comparison_provider(): array
     {
         return [
             ['v1.3.37', 'v1.3.37-alpha'],
