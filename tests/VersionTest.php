@@ -47,9 +47,10 @@ class VersionTest extends TestCase
 
     public function test_it_can_be_cast_to_a_string(): void
     {
-        $version = new SemVer\Version('v1.3.37');
-
-        $this->assertEquals('1.3.37', (string) $version);
+        $this->assertEquals('1.3.37', (string) new SemVer\Version('v1.3.37'));
+        $this->assertEquals('1.3.37-alpha.5', (string) new SemVer\Version('v1.3.37-alpha.5'));
+        $this->assertEquals('1.3.37+007', (string) new SemVer\Version('v1.3.37+007'));
+        $this->assertEquals('1.3.37-alpha.5+007', (string) new SemVer\Version('v1.3.37-alpha.5+007'));
     }
 
     public function test_it_can_get_individual_properties(): void

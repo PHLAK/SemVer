@@ -56,8 +56,14 @@ class Version
     public function __toString(): string
     {
         $version = implode('.', [$this->major, $this->minor, $this->patch]);
-        $version .= isset($this->preRelease) ? '-' . $this->preRelease : '';
-        $version .= isset($this->build) ? '+' . $this->build : '';
+
+        if (! empty($this->preRelease)) {
+            $version .= '-' . $this->preRelease;
+        }
+
+        if (! empty($this->build)) {
+            $version .= '+' . $this->build;
+        }
 
         return $version;
     }
