@@ -29,6 +29,22 @@ class VersionTest extends TestCase
         new SemVer\Version('not.a.version');
     }
 
+    public function test_it_can_parse_an_incomplete_version_string(): void
+    {
+        $this->assertEquals('1.0.0', (string) SemVer\Version::parse('v1'));
+        $this->assertEquals('1.3.0', (string) SemVer\Version::parse('v1.3'));
+        $this->assertEquals('1.3.37', (string) SemVer\Version::parse('v1.3.37'));
+        $this->assertEquals('1.3.37-alpha.5', (string) SemVer\Version::parse('v1.3.37-alpha.5'));
+        $this->assertEquals('1.3.37+007', (string) SemVer\Version::parse('v1.3.37+007'));
+    }
+
+    public function test_it_throws_a_runtime_exception_when_parsing_an_invalid_version(): void
+    {
+        $this->expectException(InvalidVersionException::class);
+
+        SemVer\Version::parse('not.a.version');
+    }
+
     public function test_it_can_set_and_retrieve_a_version(): void
     {
         $version = new SemVer\Version('v1.3.37');
