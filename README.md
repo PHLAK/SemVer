@@ -7,39 +7,31 @@ SemVer
 
 
 <p align="center">
-  <a href="http://semver.org">Semantic versioning</a> helper library for PHP
-  -- by, <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a> (<a href="https://twitter.com/PHLAK">@PHLAK</a>)
+  <a href="http://semver.org">Semantic versioning</a> helper library
+  • Created by <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a> (<a href="https://twitter.com/PHLAK">@PHLAK</a>)
 </p>
 
 <p align="center">
   <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/v/PHLAK/SemVer.svg?style=flat-square" alt="Latest Stable Version"></a>
   <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/dt/PHLAK/SemVer.svg?style=flat-square" alt="Total Downloads"></a>
   <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/l/PHLAK/SemVer.svg?style=flat-square" alt="License"></a>
-  <a href="https://travis-ci.org/PHLAK/SemVer"><img src="https://img.shields.io/travis/PHLAK/SemVer.svg?style=flat-square" alt="Build Status"></a>
+  <a href="https://travis-ci.org/PHLAK/SemVer"><img src="https://img.shields.io/travis/PHLAK/SemVer.svg?branch=master&style=flat-square" alt="Build Status"></a>
   <a href="https://styleci.io/repos/95623990"><img src="https://styleci.io/repos/95623990/shield?branch=master" alt="StyleCI"></a>
   <br>
-  <a href="https://ln.phlak.net/join-slack"><img src="https://img.shields.io/badge/Join_our-Slack-611f69.svg?style=flat-square" alt="Join our"></a>
+  <a href="https://spectrum.chat/directory-lister"><img src="https://img.shields.io/badge/Join_the-Community-7b16ff.svg?style=flat-square" alt="Join our Community"></a>
   <a href="https://github.com/users/PHLAK/sponsorship"><img src="https://img.shields.io/badge/Become_a-Sponsor-cc4195.svg?style=flat-square" alt="Become a Sponsor"></a>
-  <a href="https://patreon.com/PHLAK"><img src="https://img.shields.io/badge/Become_a-Patron-e7513b.svg?style=flat-square" alt="Become a Patron"></a>
   <a href="https://paypal.me/ChrisKankiewicz"><img src="https://img.shields.io/badge/Make_a-Donation-006bb6.svg?style=flat-square" alt="One-time Donation"></a>
-  <br>
-  <a href="https://www.ChrisKankiewicz.com"><img src="https://img.shields.io/badge/created_by-Chris%20Kankiewicz-319795.svg?style=for-the-badge" alt="Author"></a>
 </p>
 
 ---
-
-Introduction
-------------
-
-Semantic versioning helper for PHP.
 
 Requirements
 ------------
 
   - [PHP](https://php.net) >= 7.1
 
-Install with Composer
----------------------
+Installation
+------------
 
 ```bash
 composer require phlak/semver
@@ -131,7 +123,7 @@ $version1->lte($version2); // true
 Troubleshooting
 ---------------
 
-For general help and support join our [Slack Workspace](https://ln.phlak.net/join-slack).
+For general help and support join our [Spectrum Community](https://spectrum.chat/phlaknet) or reach out on [Twitter](https://twitter.com/PHLAK).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/SemVer/issues).
 
