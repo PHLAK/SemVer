@@ -55,10 +55,17 @@ $version = new SemVer\Version(); // Initilializes to '0.1.0'
 ```
 
 Or initialize with a custom version by passing a version string on creation.
-Accepts any valid semantic version string with or without a preceding 'v'.
+Accepts any valid semantic version string with or without a preceding `v`.
 
 ```php
-$version = new SemVer\Version('v1.2.3-alpha.5-sha.8d31ff4');
+$version = new SemVer\Version('v1.2.3-alpha.5+sha.8d31ff4');
+```
+
+Or parse an incomple version string with the static `Version::parse()` constructor.
+
+```php
+$version = SemVer\Version::parse('v1') // Initializes to '1.0.0'
+$version = SemVer\Version::parse('v1.2') // Initializes to '1.2.0'
 ```
 
 Usage
