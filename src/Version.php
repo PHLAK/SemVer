@@ -78,6 +78,7 @@ class Version
      * @param string $version Version string
      *
      * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
+     *
      * @return self This Version object
      */
     public static function parse(string $version): self
@@ -107,6 +108,7 @@ class Version
      * @param string $version Version string
      *
      * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
+     *
      * @return self This Version object
      */
     public function setVersion(string $version): self
