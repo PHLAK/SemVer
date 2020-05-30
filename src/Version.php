@@ -30,6 +30,8 @@ class Version
      * Class constructor, runs on object creation.
      *
      * @param string $version Version string
+     *
+     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
      */
     public function __construct(string $version = '0.1.0')
     {
@@ -75,6 +77,8 @@ class Version
      *
      * @param string $version Version string
      *
+     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
+     *
      * @return self This Version object
      */
     public static function parse(string $version): self
@@ -102,6 +106,8 @@ class Version
      * Set (override) the entire version value.
      *
      * @param string $version Version string
+     *
+     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
      *
      * @return self This Version object
      */
