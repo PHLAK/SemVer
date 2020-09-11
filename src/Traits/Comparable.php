@@ -128,8 +128,6 @@ trait Comparable
      *
      * @param string|null $preRelease1
      * @param string|null $preRelease2
-     *
-     * @return int
      */
     private function comparePreReleases($preRelease1, $preRelease2): int
     {
