@@ -86,7 +86,7 @@ class Version
         $semverRegex = '/^v?(?<major>\d+)(?:\.(?<minor>\d+)(?:\.(?<patch>\d+))?)?(?:-(?<pre_release>[0-9A-Za-z-.]+))?(?:\+(?<build>[0-9A-Za-z-.]+)?)?$/';
 
         if (! preg_match($semverRegex, $version, $matches)) {
-            throw new InvalidVersionException('Invalid Semantic Version string provided');
+            throw new InvalidVersionException('Invalid semantic version string provided');
         }
 
         $version = sprintf('%s.%s.%s', $matches['major'], $matches['minor'] ?? 0, $matches['patch'] ?? 0);
@@ -116,7 +116,7 @@ class Version
         $semverRegex = '/^v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<pre_release>[0-9A-Za-z-.]+))?(?:\+(?<build>[0-9A-Za-z-.]+)?)?$/';
 
         if (! preg_match($semverRegex, $version, $matches)) {
-            throw new InvalidVersionException('Invalid Semantic Version string provided');
+            throw new InvalidVersionException('Invalid semantic version string provided');
         }
 
         $this->major = (int) $matches['major'];
