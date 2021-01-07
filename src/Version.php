@@ -106,7 +106,7 @@ class Version
             $version .= '+' . $matches['build'];
         }
 
-        return new static($version);
+        return new self($version);
     }
 
     /**
