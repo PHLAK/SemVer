@@ -6,6 +6,13 @@ use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHLAK\SemVer\Traits\Comparable;
 use PHLAK\SemVer\Traits\Incrementable;
 
+/**
+ * @property int $major Major release number
+ * @property int $minor Minor release number
+ * @property int $patch Patch release number
+ * @property string|null $preRelease Pre-release value
+ * @property string|null $build Build release value
+ */
 class Version
 {
     use Comparable;
