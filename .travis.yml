@@ -3,14 +3,15 @@ dist: bionic
 language: php
 
 env:
-  - COMPOSER_PREFER=default
-  - COMPOSER_PREFER=lowest
+  - COMPOSER_PREFER=default PHP_CS_FIXER_IGNORE_ENV=true
+  - COMPOSER_PREFER=lowest PHP_CS_FIXER_IGNORE_ENV=true
 
 php:
   - 7.1
   - 7.2
   - 7.3
   - 7.4
+  - 8.0
   - nightly
 
 jobs:
