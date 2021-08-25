@@ -23,10 +23,9 @@
         "issues": "https://github.com/PHLAK/SemVer/issues"
     },
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.2"
     },
     "require-dev": {
-        "php": ">=7.2",
         "phlak/coding-standards": "^2.0",
         "psy/psysh": "^0.10",
         "vimeo/psalm": "^4.3",
