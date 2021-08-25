@@ -7,6 +7,41 @@ use PHLAK\SemVer\Version;
 trait Comparable
 {
     /**
+     * Compare two versions. Returns -1, 0 or 1 if the first version is less
+     * than, equal to or greater than the second version respectively.
+     *
+     * @param Version $version1 An instance of SemVer/Version
+     * @param Version $version2 An instance of SemVer/Version
+     */
+    public static function compare(Version $version1, Version $version2): int
+    {
+        $v1 = [$version1->major, $version1->minor, $version1->patch];
+        $v2 = [$version2->major, $version2->minor, $version2->patch];
+
+        $baseComparison = $v1 <=> $v2;
+
+        if ($baseComparison !== 0) {
+            return $baseComparison;
+        }
+
+        if ($version1->preRelease !== null && $version2->preRelease === null) {
+            return -1;
+        }
+
+        if ($version1->preRelease === null && $version2->preRelease !== null) {
+            return 1;
+        }
+
+        $v1preReleaseParts = explode('.', $version1->preRelease ?? '');
+        $v2preReleaseParts = explode('.', $version2->preRelease ?? '');
+
+        $preReleases1 = array_pad($v1preReleaseParts, count($v2preReleaseParts), null);
+        $preReleases2 = array_pad($v2preReleaseParts, count($v1preReleaseParts), null);
+
+        return $preReleases1 <=> $preReleases2;
+    }
+
+    /**
      * Check if this Version object is greater than another.
      *
      * @param Version $version An instance of SemVer/Version
@@ -16,16 +51,7 @@ trait Comparable
      */
     public function gt(Version $version): bool
     {
-        // compare without prerelease
-        $thisVersion = [$this->major, $this->minor, $this->patch];
-        $thatVersion = [$version->major, $version->minor, $version->patch];
-        $result = $thisVersion <=> $thatVersion;
-        // if both version are equal we should compare pre release only if both property are sets
-        if (0 === $result) {
-            $result = $this->comparePreReleases($this->preRelease, $version->preRelease);
-        }
-
-        return 1 === $result;
+        return self::compare($this, $version) > 0;
     }
 
     /**
@@ -38,15 +64,7 @@ trait Comparable
      */
     public function lt(Version $version): bool
     {
-        $thisVersion = [$this->major, $this->minor, $this->patch];
-        $thatVersion = [$version->major, $version->minor, $version->patch];
-        $result = $thisVersion <=> $thatVersion;
-        // if both version are equal we should compare pre release only if both property are sets
-        if (0 === $result) {
-            $result = $this->comparePreReleases($this->preRelease, $version->preRelease);
-        }
-
-        return $result === -1;
+        return self::compare($this, $version) < 0;
     }
 
     /**
@@ -59,10 +77,7 @@ trait Comparable
      */
     public function eq(Version $version): bool
     {
-        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
-        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
-
-        return ($thisVersion <=> $thatVersion) === 0;
+        return self::compare($this, $version) === 0;
     }
 
     /**
@@ -75,10 +90,7 @@ trait Comparable
      */
     public function neq(Version $version): bool
     {
-        $thisVersion = [$this->major, $this->minor, $this->patch, $this->preRelease];
-        $thatVersion = [$version->major, $version->minor, $version->patch, $version->preRelease];
-
-        return ($thisVersion <=> $thatVersion) !== 0;
+        return self::compare($this, $version) !== 0;
     }
 
     /**
@@ -91,15 +103,7 @@ trait Comparable
      */
     public function gte(Version $version): bool
     {
-        $thisVersion = [$this->major, $this->minor, $this->patch];
-        $thatVersion = [$version->major, $version->minor, $version->patch];
-        $result = $thisVersion <=> $thatVersion;
-        // if both version are equal we should compare pre release only if both property are sets
-        if (0 === $result) {
-            $result = $this->comparePreReleases($this->preRelease, $version->preRelease);
-        }
-
-        return $result >= 0;
+        return self::compare($this, $version) >= 0;
     }
 
     /**
@@ -112,39 +116,6 @@ trait Comparable
      */
     public function lte(Version $version): bool
     {
-        $thisVersion = [$this->major, $this->minor, $this->patch];
-        $thatVersion = [$version->major, $version->minor, $version->patch];
-        $result = $thisVersion <=> $thatVersion;
-        // if both version are equal we should compare pre release only if both property are sets
-        if (0 === $result) {
-            $result = $this->comparePreReleases($this->preRelease, $version->preRelease);
-        }
-
-        return $result <= 0;
-    }
-
-    /**
-     * Compare two pre-releases.
-     *
-     * @param string|null $preRelease1
-     * @param string|null $preRelease2
-     */
-    private function comparePreReleases($preRelease1, $preRelease2): int
-    {
-        if ($preRelease1 !== null && $preRelease2 === null) {
-            return -1;
-        }
-
-        if ($preRelease1 === null && $preRelease2 !== null) {
-            return 1;
-        }
-
-        $preReleases1 = explode('.', $preRelease1 ?? '');
-        $preReleases2 = explode('.', $preRelease2 ?? '');
-
-        $preReleases1 = array_pad($preReleases1, count($preReleases2), null);
-        $preReleases2 = array_pad($preReleases2, count($preReleases1), null);
-
-        return $preReleases1 <=> $preReleases2;
+        return self::compare($this, $version) <= 0;
     }
 }

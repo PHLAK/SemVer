@@ -292,6 +292,27 @@ class VersionTest extends TestCase
         $this->assertTrue($prerelease->lte($release));
     }
 
+    public function test_it_can_compare_two_versions(): void
+    {
+        $version1 = new SemVer\Version('v1.3.37');
+        $version2 = new SemVer\Version('v3.2.1');
+
+        // Major Comparisons
+        $this->assertEquals(-1, SemVer\Version::compare(new SemVer\Version('v1.2.3'), new SemVer\Version('v3.2.1')));
+        $this->assertEquals(0, SemVer\Version::compare(new SemVer\Version('v1.2.3'), new SemVer\Version('v1.2.3')));
+        $this->assertEquals(1, SemVer\Version::compare(new SemVer\Version('v3.2.1'), new SemVer\Version('v1.2.3')));
+
+        // Minor Comparisons
+        $this->assertEquals(-1, SemVer\Version::compare(new SemVer\Version('v0.1.2'), new SemVer\Version('v0.2.1')));
+        $this->assertEquals(0, SemVer\Version::compare(new SemVer\Version('v0.1.2'), new SemVer\Version('v0.1.2')));
+        $this->assertEquals(1, SemVer\Version::compare(new SemVer\Version('v0.2.1'), new SemVer\Version('v0.1.2')));
+
+        // Patch Comparisons
+        $this->assertEquals(-1, SemVer\Version::compare(new SemVer\Version('v1.0.1'), new SemVer\Version('v1.0.2')));
+        $this->assertEquals(0, SemVer\Version::compare(new SemVer\Version('v1.0.0'), new SemVer\Version('v1.0.0')));
+        $this->assertEquals(1, SemVer\Version::compare(new SemVer\Version('v1.0.2'), new SemVer\Version('v1.0.1')));
+    }
+
     public function pre_release_comparison_provider(): array
     {
         return [
