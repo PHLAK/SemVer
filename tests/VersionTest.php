@@ -4,7 +4,7 @@ namespace PHLAK\SemVer\Tests;
 
 use PHLAK\SemVer;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
-use PHPUnit\Framework\TestCase;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 class VersionTest extends TestCase
 {
