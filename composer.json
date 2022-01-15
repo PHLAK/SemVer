@@ -27,7 +27,7 @@
     },
     "require-dev": {
         "phlak/coding-standards": "^2.0",
-        "psy/psysh": "^0.10",
+        "psy/psysh": "^0.11.1",
         "vimeo/psalm": "^4.3",
         "yoast/phpunit-polyfills": "^1.0"
     },
