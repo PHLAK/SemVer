@@ -120,6 +120,59 @@ class VersionTest extends TestCase
         $this->assertEquals('1.3.38', (string) $version);
     }
 
+    public function test_it_can_increment_prerelease(): void
+    {
+        $version = new SemVer\Version('v1.3.37');
+        $version->setPreRelease('alpha.5');
+        $version->incrementPreRelease();
+
+        $this->assertEquals('1.3.37-alpha.6', (string) $version);
+    }
+
+    public function test_it_can_increment_prerelease_without_number(): void
+    {
+        $version = new SemVer\Version('v1.3.37');
+        $version->setPreRelease('alpha');
+        $version->incrementPreRelease();
+
+        $this->assertEquals('1.3.37-alpha.0', (string) $version);
+    }
+
+    public function test_it_can_increment_prerelease_without_prefix_for_prerelease(): void
+    {
+        $version = new SemVer\Version('v1.3.37');
+        $version->setPreRelease('5');
+        $version->incrementPreRelease();
+
+        $this->assertEquals('1.3.37-6', (string) $version);
+    }
+
+    public function test_it_can_increment_prerelease_containing_multiple_dots(): void
+    {
+        $version = new SemVer\Version('v1.3.37');
+        $version->setPreRelease('alpha.a.b.5');
+        $version->incrementPreRelease();
+
+        $this->assertEquals('1.3.37-alpha.a.b.6', (string) $version);
+    }
+
+    public function test_it_can_increment_prerelease_containing_multiple_dots_and_without_number(): void
+    {
+        $version = new SemVer\Version('v1.3.37');
+        $version->setPreRelease('alpha.a.b');
+        $version->incrementPreRelease();
+
+        $this->assertEquals('1.3.37-alpha.a.b.0', (string) $version);
+    }
+
+    public function test_it_can_increment_prerelease_and_patch_when_prerelease_is_null(): void
+    {
+        $version = new SemVer\Version('v1.3.37');
+        $version->incrementPreRelease();
+
+        $this->assertEquals('1.3.38-0', (string) $version);
+    }
+
     public function test_it_can_set_patch(): void
     {
         $version = new SemVer\Version('v1.3.37');
