@@ -49,7 +49,7 @@ trait Incrementable
     {
         if (is_null($this->preRelease)) {
             $this->incrementPatch();
-            $this->setPreRelease('0');
+            $this->setPreRelease('1');
 
             return $this;
         }
@@ -67,7 +67,7 @@ trait Incrementable
             $this->setPreRelease($number);
         } else {
             $preid = implode('.', $preRelease);
-            $this->setPreRelease($preid . '.0');
+            $this->setPreRelease($preid . '.1');
         }
 
         return $this;

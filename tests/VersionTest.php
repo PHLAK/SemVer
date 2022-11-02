@@ -135,7 +135,7 @@ class VersionTest extends TestCase
         $version->setPreRelease('alpha');
         $version->incrementPreRelease();
 
-        $this->assertEquals('1.3.37-alpha.0', (string) $version);
+        $this->assertEquals('1.3.37-alpha.1', (string) $version);
     }
 
     public function test_it_can_increment_prerelease_without_prefix_for_prerelease(): void
@@ -162,7 +162,7 @@ class VersionTest extends TestCase
         $version->setPreRelease('alpha.a.b');
         $version->incrementPreRelease();
 
-        $this->assertEquals('1.3.37-alpha.a.b.0', (string) $version);
+        $this->assertEquals('1.3.37-alpha.a.b.1', (string) $version);
     }
 
     public function test_it_can_increment_prerelease_and_patch_when_prerelease_is_null(): void
@@ -170,7 +170,7 @@ class VersionTest extends TestCase
         $version = new SemVer\Version('v1.3.37');
         $version->incrementPreRelease();
 
-        $this->assertEquals('1.3.38-0', (string) $version);
+        $this->assertEquals('1.3.38-1', (string) $version);
     }
 
     public function test_it_can_set_patch(): void
