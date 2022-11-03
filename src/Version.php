@@ -66,7 +66,7 @@ class Version
     {
         $version = implode('.', [$this->major, $this->minor, $this->patch]);
 
-        if (! is_null($this->preRelease) && strlen($this->preRelease) > 0) {
+        if (! empty($this->preRelease)) {
             $version .= '-' . $this->preRelease;
         }
 
