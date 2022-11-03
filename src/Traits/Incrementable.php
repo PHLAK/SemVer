@@ -47,28 +47,24 @@ trait Incrementable
      */
     public function incrementPreRelease(): self
     {
-        if (is_null($this->preRelease)) {
+        if (empty($this->preRelease)) {
             $this->incrementPatch();
             $this->setPreRelease('1');
 
             return $this;
         }
 
-        $preRelease = explode('.', $this->preRelease);
-        $lastElement = trim(end($preRelease));
+        $identifiers = explode('.', $this->preRelease);
 
-        if (count($preRelease) > 1 && is_numeric($lastElement)) {
-            $number = intval($lastElement) + 1;
-            array_pop($preRelease);
-            $preid = implode('.', $preRelease);
-            $this->setPreRelease($preid . '.' . $number);
-        } elseif (count($preRelease) === 1 && is_numeric($lastElement)) {
-            $number = intval($lastElement) + 1;
-            $this->setPreRelease($number);
-        } else {
-            $preid = implode('.', $preRelease);
-            $this->setPreRelease($preid . '.1');
+        if (! is_numeric(end($identifiers))) {
+            $this->setPreRelease(implode('.', [$this->preRelease, '1']));
+
+            return $this;
         }
+
+        array_push($identifiers, (string) ((int) array_pop($identifiers) + 1));
+
+        $this->setPreRelease(implode('.', $identifiers));
 
         return $this;
     }
