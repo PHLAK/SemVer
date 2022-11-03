@@ -79,9 +79,9 @@ echo $version->build;      // '007'
 ```php
 $version = new SemVer\Version('v1.2.3');
 
-$version->incrementMajor(); // v1.2.3 -> v2.0.0
-$version->incrementMinor(); // v1.2.3 -> v1.3.0
-$version->incrementPatch(); // v1.2.3 -> v1.2.4
+$version->incrementMajor();      // v1.2.3 -> v2.0.0
+$version->incrementMinor();      // v1.2.3 -> v1.3.0
+$version->incrementPatch();      // v1.2.3 -> v1.2.4
 $version->incrementPreRelease(); // v1.2.3-alpha.5 -> v1.2.3-alpha.6
 ```
 
