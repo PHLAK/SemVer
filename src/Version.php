@@ -38,7 +38,7 @@ class Version
      *
      * @param string $version Version string
      *
-     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
+     * @throws InvalidVersionException if the provided semantic version string is invalid
      */
     public function __construct(string $version = '0.1.0')
     {
@@ -64,7 +64,7 @@ class Version
      */
     public function __toString(): string
     {
-        $version = implode('.', [$this->major, $this->minor, $this->patch]);
+        $version = "{$this->major}.{$this->minor}.{$this->patch}";
 
         if (! empty($this->preRelease)) {
             $version .= '-' . $this->preRelease;
@@ -84,7 +84,7 @@ class Version
      *
      * @param string $version Version string
      *
-     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
+     * @throws InvalidVersionException if the provided semantic version string is invalid
      *
      * @return self This Version object
      */
@@ -93,7 +93,7 @@ class Version
         $semverRegex = '/^v?(?<major>\d+)(?:\.(?<minor>\d+)(?:\.(?<patch>\d+))?)?(?:-(?<pre_release>[0-9A-Za-z-.]+))?(?:\+(?<build>[0-9A-Za-z-.]+)?)?$/';
 
         if (! preg_match($semverRegex, $version, $matches)) {
-            throw new InvalidVersionException('Invalid semantic version string provided');
+            throw new InvalidVersionException('Invalid semantic version string provided.');
         }
 
         $version = sprintf('%s.%s.%s', $matches['major'], $matches['minor'] ?? 0, $matches['patch'] ?? 0);
@@ -112,7 +112,7 @@ class Version
     /**
      * Check if the version is a pre-release.
      *
-     * @return bool True if the version is a pre-release, false otherwise.
+     * @return bool true if the version is a pre-release, false otherwise
      */
     public function isPreRelease(): bool
     {
@@ -122,7 +122,7 @@ class Version
     /**
      * Check if the version has a build string.
      *
-     * @return bool True if the version has a build string, false otherwise.
+     * @return bool true if the version has a build string, false otherwise
      */
     public function hasBuild(): bool
     {
@@ -134,7 +134,7 @@ class Version
      *
      * @param string $version Version string
      *
-     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
+     * @throws InvalidVersionException if the provided semantic version string is invalid
      *
      * @return self This Version object
      */
@@ -143,7 +143,7 @@ class Version
         $semverRegex = '/^v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<pre_release>[0-9A-Za-z-.]+))?(?:\+(?<build>[0-9A-Za-z-.]+)?)?$/';
 
         if (! preg_match($semverRegex, $version, $matches)) {
-            throw new InvalidVersionException('Invalid semantic version string provided');
+            throw new InvalidVersionException('Invalid semantic version string provided.');
         }
 
         $this->major = (int) $matches['major'];
@@ -208,7 +208,7 @@ class Version
      *
      * @return self This Version object
      */
-    public function setPreRelease($value): self
+    public function setPreRelease(?string $value): self
     {
         $this->preRelease = $value;
 
@@ -222,7 +222,7 @@ class Version
      *
      * @return self This Version object
      */
-    public function setBuild($value): self
+    public function setBuild(?string $value): self
     {
         $this->build = $value;
 
@@ -239,6 +239,6 @@ class Version
      */
     public function prefix(string $prefix = 'v'): string
     {
-        return $prefix . (string) $this;
+        return $prefix . $this;
     }
 }

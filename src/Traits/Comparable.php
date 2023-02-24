@@ -4,6 +4,9 @@ namespace PHLAK\SemVer\Traits;
 
 use PHLAK\SemVer\Version;
 
+/**
+ * Trait for comparing two version objects.
+ */
 trait Comparable
 {
     /**
