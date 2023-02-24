@@ -110,6 +110,26 @@ class Version
     }
 
     /**
+     * Check if the version is a pre-release.
+     *
+     * @return bool True if the version is a pre-release, false otherwise.
+     */
+    public function isPreRelease(): bool
+    {
+        return $this->preRelease !== null && $this->preRelease !== '';
+    }
+
+    /**
+     * Check if the version has a build string.
+     *
+     * @return bool True if the version has a build string, false otherwise.
+     */
+    public function hasBuild(): bool
+    {
+        return $this->build !== null && $this->build !== '';
+    }
+
+    /**
      * Set (override) the entire version value.
      *
      * @param string $version Version string
