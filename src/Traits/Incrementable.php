@@ -2,6 +2,9 @@
 
 namespace PHLAK\SemVer\Traits;
 
+/**
+ * Trait for incrementing a version object.
+ */
 trait Incrementable
 {
     /**
@@ -62,7 +65,7 @@ trait Incrementable
             return $this;
         }
 
-        array_push($identifiers, (string) ((int) array_pop($identifiers) + 1));
+        $identifiers[] = (string)((int)array_pop($identifiers) + 1);
 
         $this->setPreRelease(implode('.', $identifiers));
 
