@@ -38,7 +38,7 @@ class Version
      *
      * @param string $version Version string
      *
-     * @throws InvalidVersionException If the provided semantic version string is invalid.
+     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
      */
     public function __construct(string $version = '0.1.0')
     {
@@ -64,7 +64,7 @@ class Version
      */
     public function __toString(): string
     {
-        $version = "{$this->major}.{$this->minor}.{$this->patch}";
+        $version = implode('.', [$this->major, $this->minor, $this->patch]);
 
         if (! empty($this->preRelease)) {
             $version .= '-' . $this->preRelease;
@@ -84,15 +84,16 @@ class Version
      *
      * @param string $version Version string
      *
+     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
+     *
      * @return self This Version object
-     * @throws InvalidVersionException If the provided semantic version string is invalid.
      */
     public static function parse(string $version): self
     {
         $semverRegex = '/^v?(?<major>\d+)(?:\.(?<minor>\d+)(?:\.(?<patch>\d+))?)?(?:-(?<pre_release>[0-9A-Za-z-.]+))?(?:\+(?<build>[0-9A-Za-z-.]+)?)?$/';
 
         if (! preg_match($semverRegex, $version, $matches)) {
-            throw new InvalidVersionException('Invalid semantic version string provided.');
+            throw new InvalidVersionException('Invalid semantic version string provided');
         }
 
         $version = sprintf('%s.%s.%s', $matches['major'], $matches['minor'] ?? 0, $matches['patch'] ?? 0);
@@ -133,7 +134,7 @@ class Version
      *
      * @param string $version Version string
      *
-     * @throws InvalidVersionException If the provided semantic version string is invalid.
+     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
      *
      * @return self This Version object
      */
@@ -142,7 +143,7 @@ class Version
         $semverRegex = '/^v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<pre_release>[0-9A-Za-z-.]+))?(?:\+(?<build>[0-9A-Za-z-.]+)?)?$/';
 
         if (! preg_match($semverRegex, $version, $matches)) {
-            throw new InvalidVersionException('Invalid semantic version string provided.');
+            throw new InvalidVersionException('Invalid semantic version string provided');
         }
 
         $this->major = (int) $matches['major'];
@@ -207,7 +208,7 @@ class Version
      *
      * @return self This Version object
      */
-    public function setPreRelease(?string $value): self
+    public function setPreRelease($value): self
     {
         $this->preRelease = $value;
 
@@ -221,7 +222,7 @@ class Version
      *
      * @return self This Version object
      */
-    public function setBuild(?string $value): self
+    public function setBuild($value): self
     {
         $this->build = $value;
 
@@ -238,6 +239,6 @@ class Version
      */
     public function prefix(string $prefix = 'v'): string
     {
-        return $prefix . $this;
+        return $prefix . (string) $this;
     }
 }
