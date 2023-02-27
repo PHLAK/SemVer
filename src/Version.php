@@ -126,7 +126,7 @@ class Version
      */
     public function hasBuild(): bool
     {
-        return $this->build !== null && $this->build !== '';
+        return ! empty($this->build);
     }
 
     /**
