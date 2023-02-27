@@ -65,7 +65,7 @@ trait Incrementable
             return $this;
         }
 
-        $identifiers[] = (string) ((int) array_pop($identifiers) + 1);
+        array_push($identifiers, (string) ((int) array_pop($identifiers) + 1));
 
         $this->setPreRelease(implode('.', $identifiers));
 
