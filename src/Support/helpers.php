@@ -7,7 +7,7 @@ if (! function_exists('semver')) {
     /**
      * Create a SemVer version object.
      *
-     * @throws InvalidVersionException if the provided semantic version string is invalid
+     * @throws InvalidVersionException
      */
     function semver(string $string): Version
     {
