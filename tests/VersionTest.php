@@ -80,6 +80,34 @@ class VersionTest extends TestCase
         $this->assertEquals('007', $version->build);
     }
 
+    public function test_it_is_pre_release(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5+007');
+
+        $this->assertTrue($version->isPreRelease());
+    }
+
+    public function test_it_is_not_pre_release(): void
+    {
+        $version = new SemVer\Version('v1.3.37+007');
+
+        $this->assertFalse($version->isPreRelease());
+    }
+
+    public function test_it_has_build_release(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5+007');
+
+        $this->assertTrue($version->hasBuild());
+    }
+
+    public function test_it_has_not_build_release(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha');
+
+        $this->assertFalse($version->hasBuild());
+    }
+
     public function test_it_can_increment_major(): void
     {
         $version = new SemVer\Version('v1.3.37');

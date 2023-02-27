@@ -1,15 +1,16 @@
 <?php
 
+use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHLAK\SemVer\Version;
 
 if (! function_exists('semver')) {
     /**
      * Create a SemVer version object.
      *
-     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
+     * @throws InvalidVersionException
      */
     function semver(string $string): Version
     {
-        return new PHLAK\SemVer\Version($string);
+        return new Version($string);
     }
 }
