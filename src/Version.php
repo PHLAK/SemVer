@@ -116,7 +116,7 @@ class Version
      */
     public function isPreRelease(): bool
     {
-        return $this->preRelease !== null && $this->preRelease !== '';
+        return ! empty($this->preRelease);
     }
 
     /**
