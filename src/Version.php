@@ -84,7 +84,7 @@ class Version
      *
      * @param string $version Version string
      *
-     * @throws InvalidVersionException if the provided semantic version string is invalid
+     * @throws InvalidVersionException
      *
      * @return self This Version object
      */
