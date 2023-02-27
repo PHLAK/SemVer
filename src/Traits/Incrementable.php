@@ -2,9 +2,6 @@
 
 namespace PHLAK\SemVer\Traits;
 
-/**
- * Trait for incrementing a version object.
- */
 trait Incrementable
 {
     /**
