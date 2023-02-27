@@ -64,7 +64,7 @@ class Version
      */
     public function __toString(): string
     {
-        $version = "{$this->major}.{$this->minor}.{$this->patch}";
+        $version = implode('.', [$this->major, $this->minor, $this->patch]);
 
         if (! empty($this->preRelease)) {
             $version .= '-' . $this->preRelease;
