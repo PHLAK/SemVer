@@ -324,6 +324,8 @@ class VersionTest extends TestCase
         $this->assertFalse($oldBuild->lt($newBuild));
         $this->assertTrue($oldBuild->gte($newBuild));
         $this->assertTrue($oldBuild->lte($newBuild));
+
+        $this->assertTrue((new SemVer\Version('v1.3.37'))->eq(new SemVer\Version('v1.3.37+007')));
     }
 
     /** @dataProvider pre_release_comparison_provider */
