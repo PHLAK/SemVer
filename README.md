@@ -108,8 +108,8 @@ $version->setBuild(null);      // v1.2.3+007 -> v1.2.3
 #### Compare two SemVer objects
 
 ```php
-$version1 = new SemVer('v1.2.3');
-$version2 = new SemVer('v3.2.1');
+$version1 = new SemVer\Version('v1.2.3');
+$version2 = new SemVer\Version('v3.2.1');
 
 $version1->gt($version2);  // false
 $version1->lt($version2);  // true
