@@ -7,9 +7,9 @@ trait Incrementable
     /**
      * Increment the major version value by one.
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public function incrementMajor(): self
+    public function incrementMajor(): static
     {
         $this->setMajor($this->major + 1);
 
@@ -19,9 +19,9 @@ trait Incrementable
     /**
      * Increment the minor version value by one.
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public function incrementMinor(): self
+    public function incrementMinor(): static
     {
         $this->setMinor($this->minor + 1);
 
@@ -31,9 +31,9 @@ trait Incrementable
     /**
      * Increment the patch version value by one.
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public function incrementPatch(): self
+    public function incrementPatch(): static
     {
         $this->setPatch($this->patch + 1);
 
@@ -43,9 +43,9 @@ trait Incrementable
     /**
      * Increment the pre-release version value by one.
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public function incrementPreRelease(): self
+    public function incrementPreRelease(): static
     {
         if (empty($this->preRelease)) {
             $this->incrementPatch();
