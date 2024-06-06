@@ -41,7 +41,21 @@ class Version implements JsonSerializable
      *
      * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
      */
-    public function __construct(string $version = '0.1.0')
+    public final function __construct(string $version = '0.1.0')
+    {
+        $this->init($version);
+    }
+
+    /**
+     * Init version object.
+     * 
+     * @param string $version Version string
+     * 
+     * @return void 
+     * 
+     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException 
+     */
+    protected function init(string $version): void
     {
         $this->setVersion($version);
     }
@@ -97,9 +111,9 @@ class Version implements JsonSerializable
      *
      * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public static function parse(string $version): self
+    public static function parse(string $version): static
     {
         $semverRegex = '/^v?(?<major>\d+)(?:\.(?<minor>\d+)(?:\.(?<patch>\d+))?)?(?:-(?<pre_release>[0-9A-Za-z-.]+))?(?:\+(?<build>[0-9A-Za-z-.]+)?)?$/';
 
@@ -117,7 +131,7 @@ class Version implements JsonSerializable
             $version .= '+' . $matches['build'];
         }
 
-        return new self($version);
+        return new static($version);
     }
 
     /**
@@ -127,9 +141,9 @@ class Version implements JsonSerializable
      *
      * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public function setVersion(string $version): self
+    public function setVersion(string $version): static
     {
         $semverRegex = '/^v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<pre_release>[0-9A-Za-z-.]+))?(?:\+(?<build>[0-9A-Za-z-.]+)?)?$/';
 
@@ -151,9 +165,9 @@ class Version implements JsonSerializable
      *
      * @param int $value Positive integer value
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public function setMajor(int $value): self
+    public function setMajor(int $value): static
     {
         $this->major = $value;
         $this->setMinor(0);
@@ -166,9 +180,9 @@ class Version implements JsonSerializable
      *
      * @param int $value Positive integer value
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public function setMinor(int $value): self
+    public function setMinor(int $value): static
     {
         $this->minor = $value;
         $this->setPatch(0);
@@ -181,9 +195,9 @@ class Version implements JsonSerializable
      *
      * @param int $value Positive integer value
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public function setPatch(int $value): self
+    public function setPatch(int $value): static
     {
         $this->patch = $value;
         $this->setPreRelease(null);
@@ -197,9 +211,9 @@ class Version implements JsonSerializable
      *
      * @param string|null $value A new pre-release value
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public function setPreRelease($value): self
+    public function setPreRelease($value): static
     {
         $this->preRelease = $value;
 
@@ -211,9 +225,9 @@ class Version implements JsonSerializable
      *
      * @param string|null $value A new build value
      *
-     * @return self This Version object
+     * @return static This Version object
      */
-    public function setBuild($value): self
+    public function setBuild($value): static
     {
         $this->build = $value;
 
