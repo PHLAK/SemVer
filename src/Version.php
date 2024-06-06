@@ -2,6 +2,7 @@
 
 namespace PHLAK\SemVer;
 
+use JsonSerializable;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHLAK\SemVer\Traits\Comparable;
 use PHLAK\SemVer\Traits\Incrementable;
@@ -13,7 +14,7 @@ use PHLAK\SemVer\Traits\Incrementable;
  * @property string|null $preRelease Pre-release value
  * @property string|null $build Build release value
  */
-class Version
+class Version implements JsonSerializable
 {
     use Comparable;
     use Incrementable;
@@ -75,6 +76,16 @@ class Version
         }
 
         return $version;
+    }
+
+    /**
+     * Serialize version to JSON.
+     * 
+     * @return mixed 
+     */
+    public function jsonSerialize()
+    {
+        return (string) $this;
     }
 
     /**

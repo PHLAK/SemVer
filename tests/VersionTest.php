@@ -368,6 +368,11 @@ class VersionTest extends TestCase
         $this->assertEquals(1, SemVer\Version::compare(new SemVer\Version('v1.0.2'), new SemVer\Version('v1.0.1')));
     }
 
+    public function test_it_is_correctly_json_serializable(): void
+    {
+        $this->assertEquals('1.3.37', new SemVer\Version('v1.3.37'));
+    }
+
     public function pre_release_comparison_provider(): array
     {
         return [
