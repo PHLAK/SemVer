@@ -370,7 +370,10 @@ class VersionTest extends TestCase
 
     public function test_it_is_correctly_json_serializable(): void
     {
-        $this->assertEquals('1.3.37', new SemVer\Version('v1.3.37'));
+        $version = new SemVer\Version('v1.3.37');
+
+        $this->assertInstanceOf(JsonSerializable::class, $version);
+        $this->assertEquals('1.3.37', $version->jsonSerialize());
     }
 
     public function pre_release_comparison_provider(): array
