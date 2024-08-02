@@ -106,7 +106,7 @@ $version->setBuild(null);      // v1.2.3+007 -> v1.2.3
 ```
 
 
-#### Checking for pre-release / build values
+#### Check for pre-release / build values
 
 ```php
 $version->isPreRelease();
