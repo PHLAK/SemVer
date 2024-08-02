@@ -228,4 +228,24 @@ class Version implements JsonSerializable
     {
         return $prefix . (string) $this;
     }
+
+    /**
+     * Determine if the version is a pre-release.
+     *
+     * @return bool Returns true if the version is a pre-release, false otherwise
+     */
+    public function isPreRelease(): bool
+    {
+        return ! empty($this->preRelease);
+    }
+
+    /**
+     * Determine if the version has a build string.
+     *
+     * @return bool Returns true if the version has a build string, false otherwise
+     */
+    public function hasBuild(): bool
+    {
+        return ! empty($this->build);
+    }
 }

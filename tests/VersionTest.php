@@ -395,4 +395,32 @@ class VersionTest extends TestCase
         $this->assertInstanceOf(JsonSerializable::class, $version);
         $this->assertEquals('1.3.37', $version->jsonSerialize());
     }
+
+    public function test_it_can_determine_if_it_is_a_pre_release(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5+007');
+
+        $this->assertTrue($version->isPreRelease());
+    }
+
+    public function test_can_determine_if_it_is_not_a_pre_release(): void
+    {
+        $version = new SemVer\Version('v1.3.37+007');
+
+        $this->assertFalse($version->isPreRelease());
+    }
+
+    public function test_can_determine_if_it_has_a_build_string(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5+007');
+
+        $this->assertTrue($version->hasBuild());
+    }
+
+    public function test_it_can_determine_if_it_has_a_build_string(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha');
+
+        $this->assertFalse($version->hasBuild());
+    }
 }
