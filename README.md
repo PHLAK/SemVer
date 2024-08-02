@@ -105,6 +105,14 @@ $version->setPreRelease(null); // v1.2.3-rc.2 -> v1.2.3
 $version->setBuild(null);      // v1.2.3+007 -> v1.2.3
 ```
 
+
+### Checking for pre-release / build values
+
+```php
+$version->isPreRelease();
+$version->hasBuild();
+```
+
 #### Compare two SemVer objects
 
 ```php
