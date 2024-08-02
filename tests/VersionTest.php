@@ -2,6 +2,7 @@
 
 namespace PHLAK\SemVer\Tests;
 
+use JsonSerializable;
 use PHLAK\SemVer;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
