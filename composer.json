@@ -28,7 +28,6 @@
     "require-dev": {
         "phlak/coding-standards": "^2.0",
         "phpstan/phpstan": "^1.11",
-        "phpunit/phpunit": "^10.5",
         "yoast/phpunit-polyfills": "^1.0 || ^2.0"
     },
     "autoload": {
