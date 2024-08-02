@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install PHP Dependencies
         run: composer update
@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install PHP Dependencies
         run: composer update
@@ -36,11 +36,11 @@ jobs:
 
     strategy:
       matrix:
-        php-versions: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
+        php-versions: ['8.0', '8.1', '8.2', '8.3']
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
