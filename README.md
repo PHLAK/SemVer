@@ -26,7 +26,7 @@ SemVer
 Requirements
 ------------
 
-  - [PHP](https://php.net) >= 7.2
+  - [PHP](https://php.net) >= 8.0
 
 Installation
 ------------

@@ -23,12 +23,12 @@
         "issues": "https://github.com/PHLAK/SemVer/issues"
     },
     "require": {
-        "php": "^7.2 || ^7.3 || ^7.4 || ^8.0 || ^8.1 || ^8.2 || 8.3"
+        "php": "^8.0 || ^8.1 || ^8.2 || 8.3"
     },
     "require-dev": {
         "phlak/coding-standards": "^2.0",
         "phpstan/phpstan": "^1.11",
-        "phpunit/phpunit": "^9.0 || ^10.0",
+        "phpunit/phpunit": "^10.0",
         "yoast/phpunit-polyfills": "^1.0 || ^2.0"
     },
     "autoload": {
