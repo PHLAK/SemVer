@@ -378,7 +378,7 @@ class VersionTest extends TestCase
     }
 
     /** @return array<array<int, mixed>> */
-    public function pre_release_comparison_provider(): array
+    public static function pre_release_comparison_provider(): array
     {
         return [
             ['v1.3.37', 'v1.3.37-alpha'],
