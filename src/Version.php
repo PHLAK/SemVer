@@ -41,21 +41,7 @@ class Version implements JsonSerializable
      *
      * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
      */
-    public final function __construct(string $version = '0.1.0')
-    {
-        $this->init($version);
-    }
-
-    /**
-     * Init version object.
-     * 
-     * @param string $version Version string
-     * 
-     * @return void 
-     * 
-     * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException 
-     */
-    protected function init(string $version): void
+    public function __construct(string $version = '0.1.0')
     {
         $this->setVersion($version);
     }
