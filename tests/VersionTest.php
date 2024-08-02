@@ -8,9 +8,9 @@ use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 /**
- * @covers PHLAK\SemVer\Version
- * @covers PHLAK\SemVer\Traits\Comparable
- * @covers PHLAK\SemVer\Traits\Incrementable
+ * @covers \PHLAK\SemVer\Version
+ * @covers \PHLAK\SemVer\Traits\Comparable
+ * @covers \PHLAK\SemVer\Traits\Incrementable
  */
 class VersionTest extends TestCase
 {
@@ -391,6 +391,7 @@ class VersionTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider pre_release_comparison_provider
      */
     public function it_compares_pre_release_tags_vs_release(string $release, string $prerelease): void
