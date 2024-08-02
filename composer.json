@@ -29,7 +29,6 @@
         "phlak/coding-standards": "^2.0",
         "phpstan/phpstan": "^1.11",
         "phpunit/phpunit": "^10.5",
-        "psy/psysh": "^0.12",
         "yoast/phpunit-polyfills": "^1.0 || ^2.0"
     },
     "autoload": {
