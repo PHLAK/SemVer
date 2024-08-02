@@ -78,12 +78,6 @@ class Version implements JsonSerializable
         return $version;
     }
 
-    /** Serialize version to JSON. */
-    public function jsonSerialize(): mixed
-    {
-        return (string) $this;
-    }
-
     /**
      * Attempt to parse an incomplete version string.
      *
@@ -114,6 +108,12 @@ class Version implements JsonSerializable
         }
 
         return new static($version);
+    }
+
+    /** Serialize version to JSON. */
+    public function jsonSerialize(): mixed
+    {
+        return (string) $this;
     }
 
     /**

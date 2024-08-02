@@ -9,6 +9,25 @@ use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 class VersionTest extends TestCase
 {
+    /** @return array<array<int, mixed>> */
+    public static function pre_release_comparison_provider(): array
+    {
+        return [
+            ['v1.3.37', 'v1.3.37-alpha'],
+            ['v1.3.37', 'v1.3.37-alpha.5+007'],
+            ['v1.3.0', 'v1.3.0-beta'],
+            ['v1.0.0', 'v1.0.0-rc1'],
+            // Test cases from http://semver.org
+            ['1.0.0', '1.0.0-rc.1'],
+            ['1.0.0-rc.1', '1.0.0-beta.11'],
+            ['1.0.0-beta.11', '1.0.0-beta.2'],
+            ['1.0.0-beta.2', '1.0.0-beta'],
+            ['1.0.0-beta', '1.0.0-alpha.beta'],
+            ['1.0.0-alpha.beta', '1.0.0-alpha.1'],
+            ['1.0.0-alpha.1', '1.0.0-alpha'],
+        ];
+    }
+
     public function test_it_can_be_initialized(): void
     {
         $version = new SemVer\Version('v1.3.37');
@@ -375,24 +394,5 @@ class VersionTest extends TestCase
 
         $this->assertInstanceOf(JsonSerializable::class, $version);
         $this->assertEquals('1.3.37', $version->jsonSerialize());
-    }
-
-    /** @return array<array<int, mixed>> */
-    public static function pre_release_comparison_provider(): array
-    {
-        return [
-            ['v1.3.37', 'v1.3.37-alpha'],
-            ['v1.3.37', 'v1.3.37-alpha.5+007'],
-            ['v1.3.0', 'v1.3.0-beta'],
-            ['v1.0.0', 'v1.0.0-rc1'],
-            // Test cases from http://semver.org
-            ['1.0.0', '1.0.0-rc.1'],
-            ['1.0.0-rc.1', '1.0.0-beta.11'],
-            ['1.0.0-beta.11', '1.0.0-beta.2'],
-            ['1.0.0-beta.2', '1.0.0-beta'],
-            ['1.0.0-beta', '1.0.0-alpha.beta'],
-            ['1.0.0-alpha.beta', '1.0.0-alpha.1'],
-            ['1.0.0-alpha.1', '1.0.0-alpha'],
-        ];
     }
 }
