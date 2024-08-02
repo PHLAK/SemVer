@@ -41,7 +41,7 @@ class Version implements JsonSerializable
      *
      * @throws \PHLAK\SemVer\Exceptions\InvalidVersionException
      */
-    public function __construct(string $version = '0.1.0')
+    final public function __construct(string $version = '0.1.0')
     {
         $this->setVersion($version);
     }
@@ -78,12 +78,8 @@ class Version implements JsonSerializable
         return $version;
     }
 
-    /**
-     * Serialize version to JSON.
-     * 
-     * @return mixed 
-     */
-    public function jsonSerialize()
+    /** Serialize version to JSON. */
+    public function jsonSerialize(): mixed
     {
         return (string) $this;
     }

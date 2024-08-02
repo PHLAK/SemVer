@@ -1,0 +1,23 @@
+parameters:
+
+  paths:
+    - src
+    - tests
+
+  level: max
+
+  checkFunctionNameCase: true
+
+  exceptions:
+    implicitThrows: false
+
+    check:
+      missingCheckedExceptionInThrows: true
+      tooWideThrowType: true
+
+    uncheckedExceptionClasses:
+      - 'RuntimeException'
+      - 'PHPUnit\Framework\Exception'
+
+includes:
+  - phpstan-ignores.neon

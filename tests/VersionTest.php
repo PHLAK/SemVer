@@ -377,6 +377,7 @@ class VersionTest extends TestCase
         $this->assertEquals('1.3.37', $version->jsonSerialize());
     }
 
+    /** @return array<array<int, mixed>> */
     public function pre_release_comparison_provider(): array
     {
         return [
