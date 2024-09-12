@@ -2,6 +2,7 @@
 
 namespace PHLAK\SemVer\Traits;
 
+use PHLAK\SemVer\Enums\Compare;
 use PHLAK\SemVer\Version;
 
 trait Comparable
@@ -13,14 +14,17 @@ trait Comparable
      * @param Version $version1 An instance of SemVer/Version
      * @param Version $version2 An instance of SemVer/Version
      */
-    public static function compare(Version $version1, Version $version2): int
+    public static function compare(Version $version1, Version $version2, Compare $comparison = Compare::FULL): int
     {
-        $v1 = [$version1->major, $version1->minor, $version1->patch];
-        $v2 = [$version2->major, $version2->minor, $version2->patch];
+        [$v1, $v2] = match ($comparison) {
+            Compare::MAJOR => [[$version1->major], [$version2->major]],
+            Compare::MINOR => [[$version1->major, $version1->minor], [$version2->major, $version2->minor]],
+            default => [[$version1->major, $version1->minor, $version1->patch], [$version2->major, $version2->minor, $version2->patch]]
+        };
 
         $baseComparison = $v1 <=> $v2;
 
-        if ($baseComparison !== 0) {
+        if ($baseComparison !== 0 || $comparison !== Compare::FULL) {
             return $baseComparison;
         }
 
@@ -49,9 +53,9 @@ trait Comparable
      * @return bool True if this Version object is greater than the comparing
      *              object, otherwise false
      */
-    public function gt(Version $version): bool
+    public function gt(Version $version, Compare $comparison = Compare::FULL): bool
     {
-        return self::compare($this, $version) > 0;
+        return self::compare($this, $version, $comparison) > 0;
     }
 
     /**
@@ -62,9 +66,9 @@ trait Comparable
      * @return bool True if this Version object is less than the comparing
      *              object, otherwise false
      */
-    public function lt(Version $version): bool
+    public function lt(Version $version, Compare $comparison = Compare::FULL): bool
     {
-        return self::compare($this, $version) < 0;
+        return self::compare($this, $version, $comparison) < 0;
     }
 
     /**
@@ -75,9 +79,9 @@ trait Comparable
      * @return bool True if this Version object is equal to the comparing
      *              object, otherwise false
      */
-    public function eq(Version $version): bool
+    public function eq(Version $version, Compare $comparison = Compare::FULL): bool
     {
-        return self::compare($this, $version) === 0;
+        return self::compare($this, $version, $comparison) === 0;
     }
 
     /**
@@ -88,9 +92,9 @@ trait Comparable
      * @return bool True if this Version object is not equal to the comparing
      *              object, otherwise false
      */
-    public function neq(Version $version): bool
+    public function neq(Version $version, Compare $comparison = Compare::FULL): bool
     {
-        return self::compare($this, $version) !== 0;
+        return self::compare($this, $version, $comparison) !== 0;
     }
 
     /**
@@ -101,9 +105,9 @@ trait Comparable
      * @return bool True if this Version object is greater than or equal to the
      *              comparing object, otherwise false
      */
-    public function gte(Version $version): bool
+    public function gte(Version $version, Compare $comparison = Compare::FULL): bool
     {
-        return self::compare($this, $version) >= 0;
+        return self::compare($this, $version, $comparison) >= 0;
     }
 
     /**
@@ -114,8 +118,8 @@ trait Comparable
      * @return bool True if this Version object is less than or equal to the
      *              comparing object, otherwise false
      */
-    public function lte(Version $version): bool
+    public function lte(Version $version, Compare $comparison = Compare::FULL): bool
     {
-        return self::compare($this, $version) <= 0;
+        return self::compare($this, $version, $comparison) <= 0;
     }
 }

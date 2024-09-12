@@ -113,7 +113,7 @@ $version->isPreRelease();
 $version->hasBuild();
 ```
 
-#### Compare two SemVer objects
+#### Compare two SemVer objects (FULL - Compares the full version string)
 
 ```php
 $version1 = new SemVer\Version('v1.2.3');
@@ -125,6 +125,60 @@ $version1->eq($version2);  // false
 $version1->neq($version2); // true
 $version1->gte($version2); // false
 $version1->lte($version2); // true
+```
+##### Explicitly compare two versions using `Compare::FULL` 
+```php
+$version1 = new SemVer\Version('v1.2.3');
+$version2 = new SemVer\Version('v3.2.1');
+
+$version1->gt($version2, Compare::FULL);  // false
+$version1->lt($version2, Compare::FULL);  // true
+$version1->eq($version2, Compare::FULL);  // false
+$version1->neq($version2, Compare::FULL); // true
+$version1->gte($version2, Compare::FULL); // false
+$version1->lte($version2, Compare::FULL); // true
+```
+
+#### MAJOR - Limit the comparison to the major version only, ignores the minor, patch and pre-release versions completely
+
+```php
+$version1 = new SemVer\Version('v1.2.3-alpha.4');
+$version2 = new SemVer\Version('v1.3.4-alpha.5');
+
+$version1->gt($version2, Compare::MAJOR);  // false
+$version1->lt($version2, Compare::MAJOR);  // false
+$version1->eq($version2, Compare::MAJOR);  // true
+$version1->neq($version2, Compare::MAJOR); // false
+$version1->gte($version2, Compare::MAJOR); // true
+$version1->lte($version2, Compare::MAJOR); // true
+```
+
+#### MINOR - Limit the comparison to the major and minor versions only, ignores the patch and pre-release versions completely
+
+```php
+$version1 = new SemVer\Version('v1.2.3-alpha.4');
+$version2 = new SemVer\Version('v1.2.4-alpha.5');
+
+$version1->gt($version2, Compare::MINOR);  // false
+$version1->lt($version2, Compare::MINOR);  // false
+$version1->eq($version2, Compare::MINOR);  // true
+$version1->neq($version2, Compare::MINOR); // false
+$version1->gte($version2, Compare::MINOR); // true
+$version1->lte($version2, Compare::MINOR); // true
+```
+
+#### PATCH - Limit the comparison to the major, minor and patch versions only, ignores the pre-release version completely
+
+```php
+$version1 = new SemVer\Version('v1.2.3-alpha.4');
+$version2 = new SemVer\Version('v1.2.3-alpha.5');
+
+$version1->gt($version2, Compare::PATCH);  // false
+$version1->lt($version2, Compare::PATCH);  // false
+$version1->eq($version2, Compare::PATCH);  // true
+$version1->neq($version2, Compare::PATCH); // false
+$version1->gte($version2, Compare::PATCH); // true
+$version1->lte($version2, Compare::PATCH); // true
 ```
 
 Troubleshooting
