@@ -4,6 +4,7 @@ namespace PHLAK\SemVer\Tests;
 
 use JsonSerializable;
 use PHLAK\SemVer;
+use PHLAK\SemVer\Enums\Compare;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
@@ -319,6 +320,191 @@ class VersionTest extends TestCase
         $this->assertTrue($version->lte(new SemVer\Version('v2.3.4')));
         $this->assertTrue($version->lte(new SemVer\Version('v1.3.37')));
         $this->assertFalse($version->lte(new SemVer\Version('v1.2.3')));
+    }
+
+    /** @test */
+    public function it_can_be_greater_than_another_semver_object_using_major(): void
+    {
+        $version = new SemVer\Version('v2.3.37');
+
+        $this->assertTrue($version->gt(new SemVer\Version('v0.5.0'), Compare::MAJOR));
+        $this->assertTrue($version->gt(new SemVer\Version('v1.3.38'), Compare::MAJOR));
+        $this->assertFalse($version->gt(new SemVer\Version('v2.3.36'), Compare::MAJOR));
+        $this->assertFalse($version->gt(new SemVer\Version('v3.3.36'), Compare::MAJOR));
+    }
+
+    /** @test */
+    public function it_can_be_less_than_another_semver_object_using_major(): void
+    {
+        $version = new SemVer\Version('v2.3.37');
+
+        $this->assertTrue($version->lt(new SemVer\Version('v3.3.38'), Compare::MAJOR));
+        $this->assertFalse($version->lt(new SemVer\Version('v2.3.36'), Compare::MAJOR));
+        $this->assertFalse($version->lt(new SemVer\Version('v1.3.37'), Compare::MAJOR));
+    }
+
+    /** @test */
+    public function it_can_be_equal_to_another_semver_object_using_major(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->eq(new SemVer\Version('v1.3.37-alpha.4'), Compare::MAJOR));
+        $this->assertTrue($version->eq(new SemVer\Version('v1.2.3'), Compare::MAJOR));
+    }
+
+    /** @test */
+    public function it_can_be_not_equal_to_another_semver_object_using_major(): void
+    {
+        $version = new SemVer\Version('v2.3.37');
+
+        $this->assertTrue($version->neq(new SemVer\Version('v3.2.3'), Compare::MAJOR));
+        $this->assertFalse($version->neq(new SemVer\Version('v2.2.3'), Compare::MAJOR));
+        $this->assertTrue($version->neq(new SemVer\Version('v1.3.37'), Compare::MAJOR));
+    }
+
+    /** @test */
+    public function it_can_be_greater_than_or_equal_to_another_semver_object_using_major(): void
+    {
+        $version = new SemVer\Version('v3.3.37-alpha.5');
+
+        $this->assertTrue($version->gte(new SemVer\Version('v1.3.4'), Compare::MAJOR));
+        $this->assertTrue($version->gte(new SemVer\Version('v2.3.37-alpha.6'), Compare::MAJOR));
+        $this->assertTrue($version->gte(new SemVer\Version('v3.2.3'), Compare::MAJOR));
+        $this->assertFalse($version->gte(new SemVer\Version('v4.2.3'), Compare::MAJOR));
+    }
+
+    /** @test */
+    public function it_can_be_less_than_or_equal_to_another_semver_object_using_major(): void
+    {
+        $version = new SemVer\Version('v2.3.37-alpha.5');
+
+        $this->assertTrue($version->lte(new SemVer\Version('v3.2.3'), Compare::MAJOR));
+        $this->assertTrue($version->lte(new SemVer\Version('v2.3.37-alpha.4'), Compare::MAJOR));
+        $this->assertFalse($version->lte(new SemVer\Version('v1.3.4'), Compare::MAJOR));
+    }
+
+    /** @test */
+    public function it_can_be_greater_than_another_semver_object_using_minor(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->gt(new SemVer\Version('v0.5.0'), Compare::MINOR));
+        $this->assertTrue($version->gt(new SemVer\Version('v1.2.40'), Compare::MINOR));
+        $this->assertFalse($version->gt(new SemVer\Version('v1.3.38-alpha.5'), Compare::MINOR));
+        $this->assertFalse($version->gt(new SemVer\Version('v1.4.0'), Compare::MINOR));
+    }
+
+    /** @test */
+    public function it_can_be_less_than_another_semver_object_using_minor(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->lt(new SemVer\Version('v1.4.38'), Compare::MINOR));
+        $this->assertTrue($version->lt(new SemVer\Version('v1.4.0'), Compare::MINOR));
+        $this->assertFalse($version->lt(new SemVer\Version('v1.2.36'), Compare::MINOR));
+        $this->assertFalse($version->lt(new SemVer\Version('v1.3.37-alpha.6'), Compare::MINOR));
+    }
+
+    /** @test */
+    public function it_can_be_equal_to_another_semver_object_using_minor(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertFalse($version->eq(new SemVer\Version('v1.4.3'), Compare::MINOR));
+        $this->assertTrue($version->eq(new SemVer\Version('v1.3.37-alpha.4'), Compare::MINOR));
+        $this->assertFalse($version->eq(new SemVer\Version('v1.2.3'), Compare::MINOR));
+    }
+
+    /** @test */
+    public function it_can_be_not_equal_to_another_semver_object_using_minor(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->neq(new SemVer\Version('v1.2.37-alpha.5'), Compare::MINOR));
+        $this->assertFalse($version->neq(new SemVer\Version('v1.3.37-alpha.6'), Compare::MINOR));
+        $this->assertTrue($version->neq(new SemVer\Version('v1.4.37'), Compare::MINOR));
+    }
+
+    /** @test */
+    public function it_can_be_greater_than_or_equal_to_another_semver_object_using_minor(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->gte(new SemVer\Version('v1.3.38-alpha.4'), Compare::MINOR));
+        $this->assertTrue($version->gte(new SemVer\Version('v1.2.3'), Compare::MINOR));
+        $this->assertFalse($version->gte(new SemVer\Version('v1.4.4'), Compare::MINOR));
+        $this->assertFalse($version->gte(new SemVer\Version('v2.3.4'), Compare::MINOR));
+    }
+
+    /** @test */
+    public function it_can_be_less_than_or_equal_to_another_semver_object_using_minor(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->lte(new SemVer\Version('v2.3.4'), Compare::MINOR));
+        $this->assertTrue($version->lte(new SemVer\Version('v1.3.37'), Compare::MINOR));
+        $this->assertTrue($version->lte(new SemVer\Version('v1.3.36'), Compare::MINOR));
+        $this->assertFalse($version->lte(new SemVer\Version('v1.2.37-alpha.5'), Compare::MINOR));
+    }
+
+    /** @test */
+    public function it_can_be_greater_than_another_semver_object_using_patch(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->gt(new SemVer\Version('v0.5.0'), Compare::PATCH));
+        $this->assertTrue($version->gt(new SemVer\Version('v1.3.36'), Compare::PATCH));
+        $this->assertFalse($version->gt(new SemVer\Version('v1.3.38'), Compare::PATCH));
+        $this->assertFalse($version->gt(new SemVer\Version('v1.3.37-alpha.4'), Compare::PATCH));
+    }
+
+    /** @test */
+    public function it_can_be_less_than_another_semver_object_using_patch(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->lt(new SemVer\Version('v1.3.38'), Compare::PATCH));
+        $this->assertTrue($version->lt(new SemVer\Version('v1.4.0'), Compare::PATCH));
+        $this->assertFalse($version->lt(new SemVer\Version('v1.3.36'), Compare::PATCH));
+        $this->assertFalse($version->lt(new SemVer\Version('v1.3.37-alpha.6'), Compare::PATCH));
+    }
+
+    /** @test */
+    public function it_can_be_equal_to_another_semver_object_using_patch(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->eq(new SemVer\Version('v1.3.37-alpha.6'), Compare::PATCH));
+        $this->assertFalse($version->eq(new SemVer\Version('v1.2.3'), Compare::PATCH));
+    }
+
+    /** @test */
+    public function it_can_be_not_equal_to_another_semver_object_using_patch(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->neq(new SemVer\Version('v1.2.3'), Compare::PATCH));
+        $this->assertFalse($version->neq(new SemVer\Version('v1.3.37-alpha.6'), Compare::PATCH));
+    }
+
+    /** @test */
+    public function it_can_be_greater_than_or_equal_to_another_semver_object_using_patch(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->gte(new SemVer\Version('v1.2.3'), Compare::PATCH));
+        $this->assertTrue($version->gte(new SemVer\Version('v1.3.37-alpha.6'), Compare::PATCH));
+        $this->assertFalse($version->gte(new SemVer\Version('v2.3.4'), Compare::PATCH));
+    }
+
+    /** @test */
+    public function it_can_be_less_than_or_equal_to_another_semver_object_using_patch(): void
+    {
+        $version = new SemVer\Version('v1.3.37-alpha.5');
+
+        $this->assertTrue($version->lte(new SemVer\Version('v2.3.4'), Compare::PATCH));
+        $this->assertTrue($version->lte(new SemVer\Version('v1.3.37-alpha.4'), Compare::PATCH));
+        $this->assertFalse($version->lte(new SemVer\Version('v1.2.3'), Compare::PATCH));
     }
 
     /** @test */
