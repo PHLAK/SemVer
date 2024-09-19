@@ -129,7 +129,8 @@ $version1->lte($version2); // true
 
 ##### Limit comparison to the major version only
 
-> [!IMPORTANT] Ignores the minor, patch and pre-release versions completely
+> [!IMPORTANT]
+> Ignores the minor, patch and pre-release versions completely
 
 ```php
 $version1 = new SemVer\Version('v1.2.3-alpha.4');
@@ -145,7 +146,8 @@ $version1->lte($version2, Compare::MAJOR); // true
 
 ##### Limit comparison to the major and minor versions only
 
-> [!IMPORTANT] Ignores the patch and pre-release versions completely
+> [!IMPORTANT]
+> Ignores the patch and pre-release versions completely
 
 ```php
 $version1 = new SemVer\Version('v1.2.3-alpha.4');
@@ -161,7 +163,8 @@ $version1->lte($version2, Compare::MINOR); // true
 
 ##### Limit comparison to the major, minor and patch versions only
 
-> [!IMPORTANT] Ignores the pre-release version completely
+> [!IMPORTANT]
+> Ignores the pre-release version completely
 
 ```php
 $version1 = new SemVer\Version('v1.2.3-alpha.4');
