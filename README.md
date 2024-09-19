@@ -26,7 +26,7 @@ SemVer
 Requirements
 ------------
 
-  - [PHP](https://php.net) >= 8.0
+  - [PHP](https://php.net) >= 8.1
 
 Installation
 ------------
@@ -54,7 +54,7 @@ $version = new SemVer\Version('v1.2.3-alpha.5+sha.8d31ff4');
 Or parse an incomple version string with the static `Version::parse()` constructor.
 
 ```php
-$version = SemVer\Version::parse('v1') // Initializes to '1.0.0'
+$version = SemVer\Version::parse('v1')   // Initializes to '1.0.0'
 $version = SemVer\Version::parse('v1.2') // Initializes to '1.2.0'
 ```
 
@@ -113,7 +113,7 @@ $version->isPreRelease();
 $version->hasBuild();
 ```
 
-#### Compare two SemVer objects (FULL - Compares the full version string)
+#### Compare two SemVer objects
 
 ```php
 $version1 = new SemVer\Version('v1.2.3');
@@ -126,20 +126,10 @@ $version1->neq($version2); // true
 $version1->gte($version2); // false
 $version1->lte($version2); // true
 ```
-##### Explicitly compare two versions using `Compare::FULL` 
-```php
-$version1 = new SemVer\Version('v1.2.3');
-$version2 = new SemVer\Version('v3.2.1');
 
-$version1->gt($version2, Compare::FULL);  // false
-$version1->lt($version2, Compare::FULL);  // true
-$version1->eq($version2, Compare::FULL);  // false
-$version1->neq($version2, Compare::FULL); // true
-$version1->gte($version2, Compare::FULL); // false
-$version1->lte($version2, Compare::FULL); // true
-```
+##### Limit comparison to the major version only
 
-#### MAJOR - Limit the comparison to the major version only, ignores the minor, patch and pre-release versions completely
+> [!IMPORTANT] Ignores the minor, patch and pre-release versions completely
 
 ```php
 $version1 = new SemVer\Version('v1.2.3-alpha.4');
@@ -153,7 +143,9 @@ $version1->gte($version2, Compare::MAJOR); // true
 $version1->lte($version2, Compare::MAJOR); // true
 ```
 
-#### MINOR - Limit the comparison to the major and minor versions only, ignores the patch and pre-release versions completely
+##### Limit comparison to the major and minor versions only
+
+> [!IMPORTANT] Ignores the patch and pre-release versions completely
 
 ```php
 $version1 = new SemVer\Version('v1.2.3-alpha.4');
@@ -167,7 +159,9 @@ $version1->gte($version2, Compare::MINOR); // true
 $version1->lte($version2, Compare::MINOR); // true
 ```
 
-#### PATCH - Limit the comparison to the major, minor and patch versions only, ignores the pre-release version completely
+##### Limit comparison to the major, minor and patch versions only
+
+> [!IMPORTANT] Ignores the pre-release version completely
 
 ```php
 $version1 = new SemVer\Version('v1.2.3-alpha.4');
