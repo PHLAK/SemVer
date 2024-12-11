@@ -7,7 +7,7 @@ SemVer
 
 <p align="center">
     <a href="http://semver.org">Semantic versioning</a> helper library
-  • Created by <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a> (<a href="https://twitter.com/PHLAK">@PHLAK</a>)
+  • Created by <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a> (<a href="https://bsky.app/profile/phlak.dev">@phlak.dev</a>)
 </p>
 
 <p align="center">
@@ -178,7 +178,7 @@ $version1->lte($version2, Compare::PATCH); // true
 Troubleshooting
 ---------------
 
-For general help and support join our [GitHub Discussions](https://github.com/PHLAK/SemVer/discussions) or reach out on [Twitter](https://twitter.com/PHLAK).
+For general help and support join our [GitHub Discussions](https://github.com/PHLAK/SemVer/discussions) or reach out on [Bluesky](https://bsky.app/profile/phlak.dev).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/SemVer/issues).
 
