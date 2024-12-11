@@ -18,7 +18,7 @@ SemVer
     <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/v/PHLAK/SemVer.svg?style=flat-square" alt="Latest Stable Version"></a>
     <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/dt/PHLAK/SemVer.svg?style=flat-square" alt="Total Downloads"></a>
     <a href="https://packagist.org/packages/PHLAK/SemVer"><img src="https://img.shields.io/packagist/l/PHLAK/SemVer.svg?style=flat-square" alt="License"></a>
-    <a href="https://github.com/PHLAK/SemVer/actions"><img alt="GitHub branch checks state" src="https://img.shields.io/github/checks-status/PHLAK/SemVer/master?style=flat-square"></a>
+    <a href="https://github.com/PHLAK/SemVer/actions"><img src="https://img.shields.io/github/actions/workflow/status/PHLAK/SemVer/test-suite.yaml?style=flat-square&label=tests" alt="Tests Status"></a>
 </p>
 
 ---
