@@ -93,7 +93,7 @@ class Version implements JsonSerializable
     {
         $semverRegex = '/^v?(?<major>\d+)(?:\.(?<minor>\d+)(?:\.(?<patch>\d+))?)?(?:-(?<pre_release>[0-9A-Za-z-.]+))?(?:\+(?<build>[0-9A-Za-z-.]+)?)?$/';
 
-        if (! preg_match($semverRegex, $version, $matches)) {
+        if (! preg_match($semverRegex, $version, $matches, PREG_UNMATCHED_AS_NULL)) {
             throw new InvalidVersionException('Invalid semantic version string provided');
         }
 
