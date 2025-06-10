@@ -67,7 +67,11 @@ class VersionTest extends TestCase
         $this->assertEquals('1.0.0', (string) SemVer\Version::parse('v1'));
         $this->assertEquals('1.3.0', (string) SemVer\Version::parse('v1.3'));
         $this->assertEquals('1.3.37', (string) SemVer\Version::parse('v1.3.37'));
+        $this->assertEquals('1.0.0-alpha.5', (string) SemVer\Version::parse('v1-alpha.5'));
+        $this->assertEquals('1.3.0-alpha.5', (string) SemVer\Version::parse('v1.3-alpha.5'));
         $this->assertEquals('1.3.37-alpha.5', (string) SemVer\Version::parse('v1.3.37-alpha.5'));
+        $this->assertEquals('1.0.0+007', (string) SemVer\Version::parse('v1+007'));
+        $this->assertEquals('1.3.0+007', (string) SemVer\Version::parse('v1.3+007'));
         $this->assertEquals('1.3.37+007', (string) SemVer\Version::parse('v1.3.37+007'));
     }
 
