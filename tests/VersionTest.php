@@ -10,12 +10,13 @@ use PHLAK\SemVer\Traits\Comparable;
 use PHLAK\SemVer\Traits\Incrementable;
 use PHLAK\SemVer\Version;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\Attributes\Test;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 #[CoversClass(Version::class)]
-#[CoversClass(Comparable::class)]
-#[CoversClass(Incrementable::class)]
+#[CoversTrait(Comparable::class)]
+#[CoversTrait(Incrementable::class)]
 class VersionTest extends TestCase
 {
     /** @return array<array<int, mixed>> */
